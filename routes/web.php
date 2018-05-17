@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+route::get('/rut', 'Front_End@home');
+
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {
 //        // Uses Auth Middleware
