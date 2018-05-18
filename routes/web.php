@@ -19,6 +19,9 @@ Route::get('/', function () {
 route::get('/rut', 'Front_End@home');
 Route::get('/Funcionarios/Nuevo','Funcionarios@nuevo_funcionario');
 
+Route::get('/Inventarios/Nuevo','Inventarios@nuevo_inventario');
+
+
 
 Route::group(['middleware' => 'auth'], function () {
     //    Route::get('/link1', function ()    {

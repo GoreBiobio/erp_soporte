@@ -40,7 +40,8 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             <label for="correo">Correo Electrónico:</label>
-                            <input type="email" class="form-control" placeholder="Correo Electrónico Institucional" required>
+                            <input type="email" class="form-control" placeholder="Correo Electrónico Institucional"
+                                   required>
                         </div>
                         <div class="col-md-3">
                             <label for="telefono">Teléfono:</label>
@@ -55,25 +56,27 @@
                         <div class="col-md-3">
                             <label for="correo">Tipo de Contrato:</label>
                             <select class="form-control">
-                                <option>Contrata</option>
-                                <option>Honorarios</option>
-                                <option>Planta</option>
-                                <option>Código del Trabajo</option>
-                                <option>Core</option>
-                                <option>Externo</option>
+                                @foreach($tipos as $tipos)
+                                    <option name="idTipos"
+                                            value="{{ $tipos->idTipo }}">{{ $tipos -> nombreTipo }}</option>
+                                @endforeach
                             </select></div>
                         <div class="col-md-3">
                             <label for="telefono">Estado Funcionario:</label>
                             <select class="form-control">
-                                <option>En Funciones</option>
-                                <option>Congelado</option>
+                                @foreach($estados as $estados)
+                                    <option name="idEstados"
+                                            value="{{ $estados->idEstado }}">{{ $estados -> nombreEstado }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="telefono">Departamento:</label>
                             <select class="form-control">
-                                <option>División de Admin y Finanzas - Departamento de Personas</option>
-                                <option>División de Admin y Finanzas - Departamento de Informática</option>
+                                @foreach($deptos as $deptos)
+                                    <option name="idDepto" value="{{ $deptos->idDepto }}">{{ $deptos -> division }}
+                                        / {{ $deptos -> departamento }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -125,55 +128,39 @@
                         <th>Paterno - Materno - Nombres</th>
                         <th>Correo Electrónico - Anexo</th>
                         <th>Departamento - Ubicación</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Presto</td>
-                        <td>Opera 7.0</td>
-                        <td>Win 95+ / OSX.1+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Presto</td>
-                        <td>Opera 7.5</td>
-                        <td>Win 95+ / OSX.2+</td>
-                        <td>-</td>
-                        <td>A</td>
-                    </tr>
-                    <tr>
-                        <td>Misc</td>
-                        <td>Links</td>
-                        <td>Text only</td>
-                        <td>-</td>
-                        <td>X</td>
-                    </tr>
-                    <tr>
-                        <td>Misc</td>
-                        <td>PSP browser</td>
-                        <td>PSP</td>
-                        <td>-</td>
-                        <td>C</td>
-                    </tr>
-                    <tr>
-                        <td>Other browsers</td>
-                        <td>All others</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>U</td>
-                    </tr>
+                    @foreach($funcionarios as $funcionarios)
+                        <tr>
+                            <td>{{ $funcionarios -> rutFunc }}</td>
+                            <td>{{ $funcionarios -> paternoFunc }} {{ $funcionarios -> maternoFunc }}
+                                , {{ $funcionarios -> nombresFunc }}</td>
+                            <td><a href="mailto:{{ $funcionarios -> correoFunc }}">{{ $funcionarios -> correoFunc}} </a> / {{ $funcionarios -> anexoFunc  }}</td>
+                            <td>{{ $funcionarios -> division }} - {{ $funcionarios -> departamento }}</td>
+                            <td>
+                                <center>
+                                    @if($funcionarios -> nombreEstado == 'En Funciones')
+                                        <i class="fa fa-circle-o text-green"></i>
+                                    @elseif($funcionarios -> nombreEstado == 'Congelado')
+                                        <i class="fa fa-circle-o text-yellow"></i>
+                                    @else
+                                        <i class="fa fa-circle-o text-red"></i>
+                                    @endif
+                                    {{ $funcionarios -> nombreEstado}}
+                                </center>
+                            </td>
+                            <td>
+                                <center>
+                                    <a class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
