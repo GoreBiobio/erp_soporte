@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DateTime;
 use DB;
 
 class Funcionarios extends Controller
@@ -45,4 +46,39 @@ class Funcionarios extends Controller
                 'funcionarios' => $funcionarios
             ]);
     }
+
+    public function guardar_funcionario(Request $request)
+    {
+
+        $fecha = new DateTime;
+        $rutFunc = $request->input('RutFunc');
+        $paternoFunc = $request->input('PaternoFunc');
+        $maternoFunc = $request->input('MaternoFunc');
+        $nombresFunc = $request->input('NombreFunc');
+        $correoFunc = $request->input('EmailFunc');
+        $anexoFunc = $request->input('AnexoFunc');
+        $fonoFunc = $request->input('TelefonoFunc');
+        $tipoContratoFunc = $request->input('TipoContratoFunc');
+        $estadoFunc = $request->input('EstadoFunc');
+        $deptoFunc = $request->input('IdDepto');
+        $campoNull = null;
+
+        DB::table('funcionarios')->insert([
+            'fecCreaFunc' => $fecha,
+            'rutFunc' => $rutFunc,
+            'paternoFunc' => $paternoFunc,
+            'maternoFunc' => $maternoFunc,
+            'nombresFunc' => $nombresFunc,
+            'correoFunc' => $correoFunc,
+            'anexoFunc' => $anexoFunc,
+            'fonoFunc' => $fonoFunc,
+            'fecBajaFunc' => $campoNull,
+            'motivoBajaFunc' => $campoNull,
+            'contratoFunc' => $tipoContratoFunc,
+            'estadoFunc' => $estadoFunc,
+            'departamentos_idDepto' => $deptoFunc
+        ]);
+
+    }
+
 }

@@ -16,65 +16,64 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <form role="form" class="form-horizontal">
+                <form role="form" action="/Funcionarios/Guardar" method="POST" class="form-horizontal">
                     <!-- text input -->
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <div class="col-md-3">
                             <label for="rut">RUT:</label>
-                            <input type="text" class="form-control" placeholder="00.000.000-0">
+                            <input type="text" name="RutFunc" class="form-control" placeholder="00.000.000-0" required>
                         </div>
                         <div class="col-md-3">
                             <label for="paterno">Paterno:</label>
-                            <input type="text" class="form-control" placeholder="Apellido Paterno">
+                            <input type="text" name="PaternoFunc" class="form-control" placeholder="Apellido Paterno" required>
                         </div>
                         <div class="col-md-3">
                             <label for="materno">Materno:</label>
-                            <input type="text" class="form-control" placeholder="Apellido Materno">
+                            <input type="text" name="MaternoFunc" class="form-control" placeholder="Apellido Materno" required>
                         </div>
                         <div class="col-md-3">
                             <label for="nombres">Nombres:</label>
-                            <input type="text" class="form-control" placeholder="Nombres">
+                            <input type="text" name="NombreFunc" class="form-control" placeholder="Nombres" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-4">
                             <label for="correo">Correo Electrónico:</label>
-                            <input type="email" class="form-control" placeholder="Correo Electrónico Institucional"
+                            <input type="email" name="EmailFunc" class="form-control" placeholder="Correo Electrónico Institucional"
                                    required>
                         </div>
                         <div class="col-md-3">
                             <label for="telefono">Teléfono:</label>
-                            <input type="text" class="form-control" placeholder="Teléfono Personal">
+                            <input type="text" name="TelefonoFunc" class="form-control" placeholder="Teléfono Personal" required>
                         </div>
                         <div class="col-md-2">
-                            <label for="telefono">Anexo Interno:</label>
-                            <input type="number" class="form-control">
+                            <label for="anexo">Anexo Interno:</label>
+                            <input type="number" name="AnexoFunc" class="form-control">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-3">
-                            <label for="correo">Tipo de Contrato:</label>
-                            <select class="form-control">
+                            <label for="tc">Tipo de Contrato:</label>
+                            <select class="form-control" name="TipoContratoFunc">
                                 @foreach($tipos as $tipos)
-                                    <option name="idTipos"
-                                            value="{{ $tipos->idTipo }}">{{ $tipos -> nombreTipo }}</option>
+                                    <option value="{{ $tipos->idTipo }}">{{ $tipos -> nombreTipo }}</option>
                                 @endforeach
                             </select></div>
                         <div class="col-md-3">
                             <label for="telefono">Estado Funcionario:</label>
-                            <select class="form-control">
+                            <select class="form-control" name="EstadoFunc">
                                 @foreach($estados as $estados)
-                                    <option name="idEstados"
-                                            value="{{ $estados->idEstado }}">{{ $estados -> nombreEstado }}</option>
+                                    <option value="{{ $estados->idEstado }}">{{ $estados -> nombreEstado }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="telefono">Departamento:</label>
-                            <select class="form-control">
+                            <select class="form-control" name="IdDepto">
                                 @foreach($deptos as $deptos)
-                                    <option name="idDepto" value="{{ $deptos->idDepto }}">{{ $deptos -> division }}
+                                    <option value="{{ $deptos->idDepto }}">{{ $deptos -> division }}
                                         / {{ $deptos -> departamento }}</option>
                                 @endforeach
                             </select>
@@ -96,19 +95,10 @@
             </div>
             <div class="box-body">
                 <a class="btn btn-app">
-                    <i class="fa fa-edit"></i> Edit
+                    <i class="fa fa-circle-o text-green"></i> Divisiones
                 </a>
                 <a class="btn btn-app">
-                    <i class="fa fa-play"></i> Play
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-repeat"></i> Repeat
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-pause"></i> Pause
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-save"></i> Save
+                    <i class="fa fa-circle-o text-green"></i> Departamentos
                 </a>
             </div>
         </div>

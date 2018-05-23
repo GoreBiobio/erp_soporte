@@ -17,10 +17,23 @@ Route::get('/', function () {
 
 
 route::get('/rut', 'Front_End@home');
+
 Route::get('/Funcionarios/Nuevo','Funcionarios@nuevo_funcionario');
+Route::post('/Funcionarios/Guardar','Funcionarios@guardar_funcionario');
 
-Route::get('/Inventarios/Nuevo','Inventarios@nuevo_inventario');
 
+Route::get('/Inventarios/Hardware','Inventarios@nuevo_hardware');
+Route::post('/Inventarios/GuardarHardware','Inventarios@guardar_hardware');
+
+Route::get('/Inventarios/Software','Inventarios@nuevo_software');
+Route::post('/Inventarios/GuardarSoftware','Inventarios@guardar_software');
+
+
+Route::get('/Mantenciones/Nuevo', 'Mantenciones@nueva_mantencion');
+
+Route::get('/Soporte/Nuevo', 'Soportes@nuevo_soporte');
+
+Route::get('/Mensajeria', 'Mensajes@ver');
 
 
 Route::group(['middleware' => 'auth'], function () {
