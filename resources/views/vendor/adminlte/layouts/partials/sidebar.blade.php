@@ -61,28 +61,31 @@
                 <ul class="treeview-menu">
                     <li><a href="/Inventarios/Hardware">Gestión Hardware</a></li>
                     <li><a href="/Inventarios/Software">Gestión Software</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="/Inventarios/Auditoria">Auditoria al Inventario</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-random'></i> <span>Comodatos</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Enlazar Equipo / Persona</a></li>
+                    <li><a href="/Comodatos/EnlazarHard">Enlazar Hardware / Persona</a></li>
+                    <li><a href="/Comodatos/EnlazarSoft">Enlazar Software / Persona</a></li>
                     <li><a href="#">Revisar Comodatos</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-user'></i> <span>Soporte</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="/Soporte/Nuevo">Gestión Soporte</a></li>
+                    <li><a href="/Soporte/Nuevo">Nuevo Soporte</a></li>
+                    <li><a href="/Soporte/Gestion">Gestionar Soportes</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-wrench'></i> <span>Mantenciones</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="/Mantenciones/Nuevo">Gestión Mantenciones</a></li>
+                    <li><a href="/Mantencion/Nuevo">Nueva Mantención</a></li>
+                    <li><a href="/Mantencion/Gestion">Gestionar Mantenciones</a></li>
                 </ul>
             </li>
             <li class="treeview">

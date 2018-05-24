@@ -43,7 +43,7 @@
                             <label for="telefono">Tipo Hardware:</label>
                             <select class="form-control" name="TipoHard">
                                 @foreach($tipos as $tipos)
-                                    <option value="{{ $tipos->idTipo }}">{{ $tipos -> nombreTipo }}</option>
+                                    <option value="{{ $tipos->nombreTipo }}">{{ $tipos -> nombreTipo }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -91,7 +91,7 @@
                             <label for="correo">Estado Actual:</label>
                             <select class="form-control" name="EstActHard">
                                 @foreach($e_a as $e_a)
-                                    <option value="{{ $e_a->idEstado }}">{{ $e_a -> nombreEstado }}</option>
+                                    <option value="{{ $e_a->nombreEstado }}">{{ $e_a -> nombreEstado }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -99,7 +99,7 @@
                             <label for="telefono">Estado Inicial:</label>
                             <select class="form-control" name="EstInihard">
                                 @foreach($e_b as $e_b)
-                                    <option value="{{ $e_b->idEstado }}">{{ $e_b -> nombreEstado }}</option>
+                                    <option value="{{ $e_b->nombreEstado }}">{{ $e_b -> nombreEstado }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -176,14 +176,14 @@
                     <tbody>
                     @foreach($hard_d as $h_d)
                         <tr>
-                            <td>{{ $h_d -> nombreTipo }}</td>
+                            <td>{{ $h_d -> tipoHard }}</td>
                             <td>{{ $h_d -> marca }} {{ $h_d -> modelo }}</td>
                             <td>{{ $h_d -> capacidadHard }} GB HDD / {{ $h_d -> ramHard }} GB RAM</td>
                             <td>{{ $h_d -> nombreBod }} - {{ $h_d -> nombreSecc }} / Caja: {{ $h_d -> numCaja }}</td>
                             <td><center>
-                                    @if($h_d -> estadoHardNA == '3')
+                                    @if($h_d -> estadoHardNA == 'Nuevo')
                                         <i class="fa fa-circle-o text-green"></i> Nuevo
-                                    @elseif($h_d -> estadoHardNA == '4')
+                                    @elseif($h_d -> estadoHardNA == 'Usado')
                                         <i class="fa fa-circle-o text-yellow"></i> Usado
                                     @else
                                         <i class="fa fa-circle-o text-red"></i> Desconocido
