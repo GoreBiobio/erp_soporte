@@ -33,7 +33,13 @@
                     <tbody>
                     @foreach($h_d as $h_d)
                         <tr>
-                            <td>{{ $h_d -> numSerieHard }}</td>
+                            <td>
+                                <form action="/Comodatos/EnlazarHardPasoUno" method="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="idHard" value="{{ $h_d -> idHard }}">
+                                    <button type="submit" class="btn btn-success btn-xs"><i class="fa fa-desktop"></i> {{ $h_d -> numSerieHard }}</button>
+                                </form>
+                            </td>
                             <td>{{ $h_d -> fol_invHard }}</td>
                             <td>{{ $h_d -> tipoHard }}</td>
                             <td>{{ $h_d -> marca }} {{ $h_d -> modelo }}</td>

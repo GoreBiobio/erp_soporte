@@ -70,7 +70,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/Comodatos/EnlazarHard">Enlazar Hardware / Persona</a></li>
                     <li><a href="/Comodatos/EnlazarSoft">Enlazar Software / Persona</a></li>
-                    <li><a href="#">Revisar Comodatos</a></li>
+                    <li><a href="#">Auditar Comodatos</a></li>
                 </ul>
             </li>
             <li class="treeview">
