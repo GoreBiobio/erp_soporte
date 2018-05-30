@@ -58,19 +58,28 @@
         <div class="row">
             <!-- accepted payments column -->
             <div class="col-xs-6">
-                <p class="lead"><small>Detalle Equipo:</small></p>
+                <p class="lead">
+                    <small>Detalle Equipo:</small>
+                </p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                     {{ $fic_hard -> obsHard }}
-                    <br><br>Ubicación: {{ $fic_hard -> nombreBod }} / {{ $fic_hard -> nombreSecc }} - Caja: {{ $fic_hard -> numCaja }}
+                    <br><br>Ubicación: {{ $fic_hard -> nombreBod }} / {{ $fic_hard -> nombreSecc }} -
+                    Caja: {{ $fic_hard -> numCaja }}
                 </p>
             </div>
             <!-- /.col -->
             <div class="col-xs-6">
-                <p class="lead"><small>Opciones Equipo:</small></p>
+                <p class="lead">
+                    <small>Opciones Equipo:</small>
+                </p>
 
-                <button class="btn btn-success"><i class="fa fa-random"></i> INICIAR COMODATO</button>
-                <button class="btn btn-warning"><i class="fa fa-exclamation"></i> SOLICITAR BAJA</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalComodato"><i
+                            class="fa fa-random"></i> INICIAR COMODATO
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalBaja"><i
+                            class="fa fa-archive"></i> SOLICITAR BAJA
+                </button>
 
                 </p>
             </div>
@@ -79,25 +88,38 @@
 
         <div class="row">
             <div class="col-xs-12 table-responsive">
-                <p class="lead"><small>Log Historico Equipo:</small></p>
+                <p class="lead">
+                    <small>Log Historico Equipo:</small>
+                </p>
                 <table class="table table-striped">
                     <thead>
                     <tr>
                         <th>ID LOG</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
+                        <th>Documentos</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><center>1</center></td>
+                        <td>
+                            <center>1</center>
+                        </td>
                         <td>{{ $fic_hard -> fecCargaHard }}</td>
-                        <td>Equipo es añadido al inventario informático del Gobierno Regional</td>
+                        <td>EQUIPO AÑADIDO AL INVENTARIO INFORMÁTICO DEL GOBIERNO REGIONAL</td>
+                        <td><i class="fa fa-archive"></i> Descargar</td>
                     </tr>
                     @foreach($com as $com)
                         <tr>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <center>-</center>
+                            </td>
+                            <td>{{ $com -> fechaIngComod }}</td>
+                            <td>ENTREGA DE EQUIPO EN COMODATO A:
+                                <strong>{{$com -> paternoFunc .' '. $com->maternoFunc .', '. $com->nombresFunc}}</strong>
+                                EN ESTADO: <strong>{{$com -> estadoEqComod}}</strong> - ENTREGADO POR:
+                                <strong>{{ $com -> name }}</strong>
+                            </td>
                             <td></td>
                         </tr>
                     @endforeach
@@ -111,10 +133,102 @@
 
             <div class="col-xs-12">
                 <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>
-                     Imprimir Ficha</a>
+                    Imprimir Ficha</a>
             </div>
         </div>
     </section>
     <!-- /.content -->
 
+    <!-- Modal -->
+    <div id="ModalComodato" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Iniciar Comodato</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/Comodatos/Guardar" method="POST" class="form-horizontal">
+                        <!-- text input -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="idHard" value="{{ $fic_hard -> idHard }}">
+                        <input type="hidden" name="estadoAntEq" value="{{ $fic_hard -> estadoHardNA }}">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="telefono">Funcionario que Recibe:</label>
+                                <select class="form-control" name="idFuncRec">
+                                    @foreach($func as $func)
+                                        <option value="{{ $func->idFunc }}">{{ $func -> paternoFunc }} {{ $func -> maternoFunc }}
+                                            , {{ $func -> nombresFunc }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <label for="correo">Fecha Devolución Aproximada:</label>
+                                <input type="date" name="FecDevol" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="correo">Ubicación del Equipo:</label>
+                                <input type="text" name="UbicEqui" class="form-control"
+                                       placeholder="Oficina, Pasillo, Sector"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label for="nombres">Funcionario que entrega</label>
+                                <input type="hidden" name="idInfo" value="{{ Auth::user()->idFuncUser }}">
+                                <input type="text" class="form-control" value="{{ Auth::user()->name  }}"
+                                       placeholder="Teléfono Personal" readonly>
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="reset" class="btn btn-default">Limpiar Formulario</button>
+                            <button type="submit" class="btn btn-primary pull-right">Guardar Comodato</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="ModalBaja" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Solicitar Baja</h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="/Comodatos/Baja" method="POST" class="form-horizontal">
+                        <!-- text input -->
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-danger">Solicitar la Baja de Equipos</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 @endsection

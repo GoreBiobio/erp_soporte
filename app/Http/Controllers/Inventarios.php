@@ -144,6 +144,8 @@ class Inventarios extends Controller
             'cajas_idCaja' => $UbiqHard,
             'modelos_idModelo' => $IdModelo
         ]);
+
+        return back();
     }
 
     public function guardar_software(Request $request)

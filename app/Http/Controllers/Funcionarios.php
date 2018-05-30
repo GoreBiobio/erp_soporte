@@ -61,7 +61,6 @@ class Funcionarios extends Controller
         $tipoContratoFunc = $request->input('TipoContratoFunc');
         $estadoFunc = $request->input('EstadoFunc');
         $deptoFunc = $request->input('IdDepto');
-        $campoNull = null;
 
         DB::table('funcionarios')->insert([
             'fecCreaFunc' => $fecha,
@@ -72,8 +71,6 @@ class Funcionarios extends Controller
             'correoFunc' => $correoFunc,
             'anexoFunc' => $anexoFunc,
             'fonoFunc' => $fonoFunc,
-            'fecBajaFunc' => $campoNull,
-            'motivoBajaFunc' => $campoNull,
             'contratoFunc' => $tipoContratoFunc,
             'estadoFunc' => $estadoFunc,
             'departamentos_idDepto' => $deptoFunc

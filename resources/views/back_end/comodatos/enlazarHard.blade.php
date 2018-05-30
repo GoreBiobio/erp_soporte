@@ -53,7 +53,6 @@
                 </table>
             </div>
         </div>
-        <!-- /.box-body -->
     </div>
 
 @endsection

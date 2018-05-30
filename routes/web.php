@@ -21,6 +21,7 @@ Route::post('/Inventarios/GuardarSoftware','Inventarios@guardar_software');
 //Rutas Módulo de Enlace Comodatos
 Route::get('/Comodatos/EnlazarHard', 'Comodatos@enlazar_equipos');
 Route::post('/Comodatos/EnlazarHardPasoUno','Comodatos@enlazar_equipos_pasouno');
+Route::post('/Comodatos/Guardar', 'Comodatos@guardar_nuevo');
 
 //Rutas Módulo Mantención
 Route::get('/Mantencion/Nuevo', 'Mantenciones@nueva_mantencion');

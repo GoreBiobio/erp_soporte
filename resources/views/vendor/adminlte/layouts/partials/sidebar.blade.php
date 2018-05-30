@@ -61,7 +61,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/Inventarios/Hardware">Gestión Hardware</a></li>
                     <li><a href="/Inventarios/Software">Gestión Software</a></li>
-                    <li><a href="/Inventarios/Auditoria">Auditoria al Inventario</a></li>
+                    <li><a href="/Inventarios/Auditoria">Auditar Inventario</a></li>
                 </ul>
             </li>
             <li class="treeview">
