@@ -21,7 +21,7 @@
                     <thead>
                     <tr>
                         <th>N° SERIE</th>
-                        <th>FOLIO INVENTARIO</th>
+                        <th>FOLIO INV / IMEI</th>
                         <th>TIPO</th>
                         <th>MARCA MODELO</th>
                         <th>CAPACIDAD - RAM</th>
@@ -37,10 +37,11 @@
                                 <form action="/Comodatos/EnlazarHardPasoUno" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="idHard" value="{{ $h_d -> idHard }}">
-                                    <button type="submit" class="btn btn-success btn-xs"><i class="fa fa-desktop"></i> {{ $h_d -> numSerieHard }}</button>
+                                    <button type="submit" class="btn btn-success btn-xs"><i
+                                                class="fa fa-desktop"></i> {{ $h_d -> numSerieHard }}</button>
                                 </form>
                             </td>
-                            <td>{{ $h_d -> fol_invHard }}</td>
+                            <td>{{ $h_d -> fol_invHard }} / {{ $h_d->imeiHard }}</td>
                             <td>{{ $h_d -> tipoHard }}</td>
                             <td>{{ $h_d -> marca }} {{ $h_d -> modelo }}</td>
                             <td>{{ $h_d -> capacidadHard }} GB - {{ $h_d->ramHard }} GB</td>

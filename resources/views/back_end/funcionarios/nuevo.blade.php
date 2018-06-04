@@ -60,7 +60,8 @@
                                 @foreach($tipos as $tipos)
                                     <option value="{{ $tipos->idTipo }}">{{ $tipos -> nombreTipo }}</option>
                                 @endforeach
-                            </select></div>
+                            </select>
+                        </div>
                         <div class="col-md-3">
                             <label for="telefono">Estado Funcionario:</label>
                             <select class="form-control" name="EstadoFunc">

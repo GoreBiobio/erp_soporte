@@ -175,4 +175,84 @@ class Inventarios extends Controller
         return back();
     }
 
+    public function auditar()
+    {
+
+        $cajas = DB::table('cajas')
+            ->join('secciones','secciones.idSecc', 'cajas.secciones_idSecc')
+            ->join('bodegas', 'bodegas.idBod','secciones.bodegas_idBod')
+            ->get();
+
+        $tipos = DB::table('tipos')
+            ->where([
+                ['nivelTipo', 'Hardware'],
+                ['subnivelTipo', 'Nuevo'],
+                ['estadoTipo', 'Activa']
+            ])
+            ->OrderBy('nombreTipo')
+            ->get();
+
+        $usos = DB::table('estados')
+            ->where([
+                ['nivelEstado', 'Hardware'],
+                ['subnivelEstado', 'NuevoB'],
+                ['estadoEstado', 'Activa']
+            ])
+            ->OrderBy('nombreEstado')
+            ->get();
+
+        $funcionarios = DB::table('funcionarios')
+            ->OrderBy('paternoFunc')
+            ->get();
+
+
+        return view('back_end.inventarios.auditar',[
+            'cajas' => $cajas,
+            'tipos' => $tipos,
+            'usos' => $usos,
+            'funcionarios' => $funcionarios
+        ]);
+
+    }
+
+    public function por_caja(Request $request){
+
+        $caja = $request->input('VerCaja');
+        $nombreCaja = DB::table('cajas')
+            ->where('idCaja',$caja)
+            ->get();
+
+        $equipos = DB::table('hardwares')
+            ->where('cajas_idCaja',$caja)
+            ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
+            ->get();
+
+        return view('back_end.inventarios.por_cajas',[
+            'equipos' => $equipos,
+            'caja' => $nombreCaja
+        ]);
+
+    }
+
+    public function por_tipo(Request $request){
+
+        $tipo = $request->input('VerTipo');
+
+        $equipos = DB::table('hardwares')
+            ->where('tipoHard',$tipo)
+            ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
+            ->join('cajas', 'cajas.idCaja', '=', 'hardwares.cajas_idCaja')
+            ->join('secciones', 'secciones.idSecc', '=', 'cajas.secciones_idSecc')
+            ->join('bodegas', 'bodegas.idBod', '=', 'secciones.bodegas_idBod')
+            ->get();
+
+        return view('back_end.inventarios.por_tipos',[
+            'equipos' => $equipos,
+            'tipo' => $tipo
+        ]);
+
+    }
+
 }

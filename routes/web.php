@@ -18,10 +18,21 @@ Route::post('/Inventarios/GuardarHardware','Inventarios@guardar_hardware');
 Route::get('/Inventarios/Software','Inventarios@nuevo_software');
 Route::post('/Inventarios/GuardarSoftware','Inventarios@guardar_software');
 
+route::get('/Inventarios/Auditar', 'Inventarios@auditar');
+
+route::post('/Inventarios/porCaja','Inventarios@por_caja');
+route::post('/Inventarios/porTipo','Inventarios@por_tipo');
+
+
+
 //Rutas Módulo de Enlace Comodatos
 Route::get('/Comodatos/EnlazarHard', 'Comodatos@enlazar_equipos');
 Route::post('/Comodatos/EnlazarHardPasoUno','Comodatos@enlazar_equipos_pasouno');
 Route::post('/Comodatos/Guardar', 'Comodatos@guardar_nuevo');
+
+route::get('/Comodatos/Auditar', 'Comodatos@auditar');
+route::post('/Comodatos/porFuncionario','Comodatos@por_funcionario');
+
 
 //Rutas Módulo Mantención
 Route::get('/Mantencion/Nuevo', 'Mantenciones@nueva_mantencion');

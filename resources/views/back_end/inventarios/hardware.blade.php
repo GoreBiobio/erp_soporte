@@ -167,6 +167,7 @@
                     <tr>
                         <th>Tipo HW</th>
                         <th>Marca - Modelo</th>
+                        <th>IMEI</th>
                         <th>Capacidad - Ram</th>
                         <th>Ubicación</th>
                         <th>Estado Actual</th>
@@ -178,6 +179,7 @@
                         <tr>
                             <td>{{ $h_d -> tipoHard }}</td>
                             <td>{{ $h_d -> marca }} {{ $h_d -> modelo }}</td>
+                            <td>{{ $h_d -> imeiHard }}</td>
                             <td>{{ $h_d -> capacidadHard }} GB HDD / {{ $h_d -> ramHard }} GB RAM</td>
                             <td>{{ $h_d -> nombreBod }} - {{ $h_d -> nombreSecc }} / Caja: {{ $h_d -> numCaja }}</td>
                             <td><center>

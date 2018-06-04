@@ -43,7 +43,6 @@
                     <small class="label pull-right bg-yellow">12</small>
                     </span>
                 </a>
-
             </li>
             <li class="header">SISTEMA</li>
             <!-- Optionally, you can add icons to the links -->
@@ -61,7 +60,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/Inventarios/Hardware">Gestión Hardware</a></li>
                     <li><a href="/Inventarios/Software">Gestión Software</a></li>
-                    <li><a href="/Inventarios/Auditoria">Auditar Inventario</a></li>
+                    <li><a href="/Inventarios/Auditar">Auditar Inventario</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -70,7 +69,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/Comodatos/EnlazarHard">Enlazar Hardware / Persona</a></li>
                     <li><a href="/Comodatos/EnlazarSoft">Enlazar Software / Persona</a></li>
-                    <li><a href="#">Auditar Comodatos</a></li>
+                    <li><a href="/Comodatos/Auditar">Auditar Comodatos</a></li>
                 </ul>
             </li>
             <li class="treeview">

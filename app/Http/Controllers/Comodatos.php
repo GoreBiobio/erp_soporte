@@ -88,16 +88,55 @@ class Comodatos extends Controller
             'hardwares_idHard' => $idHardware
         ]);
 
-        // Cambia el estado del Hardware a En Comodato.
+        // Cambia el estado del Hardware a En Comodato y cambia el estado de hardware a Usado.
         DB::table('hardwares')
             ->where('idHard', $idHardware)
             ->update([
+                'estadoHardNA' => 'Usado',
                 'estadoHardNB' => 'En Comodato'
             ]);
 
-
-
         return $this->enlazar_equipos();
+    }
+
+    public function auditar()
+    {
+
+        $usos = DB::table('estados')
+            ->where([
+                ['nivelEstado', 'Hardware'],
+                ['subnivelEstado', 'NuevoB'],
+                ['estadoEstado', 'Activa']
+            ])
+            ->OrderBy('nombreEstado')
+            ->get();
+
+        $funcionarios = DB::table('funcionarios')
+            ->OrderBy('paternoFunc')
+            ->get();
+
+
+        return view('back_end.comodatos.auditar', [
+            'usos' => $usos,
+            'funcionarios' => $funcionarios
+        ]);
+    }
+
+    public function por_funcionario(Request $request)
+    {
+
+        $idFuncionario = $request->input('VerFuncionarios');
+
+        $comodatos = DB::table('comodatos')
+            ->where('funcRecibeComod', $idFuncionario)
+            ->join('hardwares','hardwares.idHard', 'comodatos.hardwares_idHard')
+            ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
+            ->get();
+
+        return view('back_end.comodatos.por_funcionarios',[
+            'comodatos' => $comodatos
+        ]);
 
     }
 
