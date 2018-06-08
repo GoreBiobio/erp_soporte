@@ -24,6 +24,7 @@
                         <th>EQUIPO (TIPO, MARCA, MODELO, SERIE, IMEI)</th>
                         <th>ESTADO COMODATO</th>
                         <th>FEC. DEVOL ESTIMADA</th>
+                        <th>DOCS</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,14 @@
                                 - SERIE: {{ $comodatos ->numSerieHard }} - IMEI: {{ $comodatos -> imeiHard }}</td>
                             <td>{{ $comodatos -> estadoComod }}</td>
                             <td>{{ $comodatos -> fechaDevEstComod }}</td>
+                            <td>
+                                <form action="/Comodatos/GenerarWord" method="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
+                                    <button type="submit" class="btn btn-primary btn-xs"><i
+                                                class="fa fa-file-word-o"></i> Word Comodato</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

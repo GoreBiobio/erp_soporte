@@ -7,6 +7,8 @@ Route::get('/', function () {
 // Rutas de Módulos Que No Requieren Autentificación
 route::get('/rut', 'Front_End@home');
 
+route::get('/Word','GenerarWord@crearWord');
+
 // Rutas Módulo Recursos Humanos
 Route::get('/Funcionarios/Nuevo','Funcionarios@nuevo_funcionario');
 Route::post('/Funcionarios/Guardar','Funcionarios@guardar_funcionario');
@@ -32,6 +34,10 @@ Route::post('/Comodatos/Guardar', 'Comodatos@guardar_nuevo');
 
 route::get('/Comodatos/Auditar', 'Comodatos@auditar');
 route::post('/Comodatos/porFuncionario','Comodatos@por_funcionario');
+
+
+//Rutas Módulo de Generar Word
+route::post('/Comodatos/GenerarWord', 'GenerarWord@generar_word');
 
 
 //Rutas Módulo Mantención
