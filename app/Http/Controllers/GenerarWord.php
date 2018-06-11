@@ -57,9 +57,8 @@ class GenerarWord extends Controller
             }
         }
 
-        $text = "ACTA DE ENTREGA - FOLIO: ".$comodatos->idComod."/".date("Y", strtotime($comodatos->fechaIngComod));
+        $text = "ACTA DE ENTREGA - FOLIO: " . $comodatos->idComod . "/" . date("Y", strtotime($comodatos->fechaIngComod));
         $section->addTextBreak();
-
 
         /*
          *
@@ -117,7 +116,6 @@ class GenerarWord extends Controller
         ESTADO: " . $comodatos->estadoEqComod . "<w:br />
         OBSERVACIONES: " . $comodatos->obsHard . "<w:br />";
 
-
         $table = $section->addTable();
         for ($r = 1; $r <= 1; $r++) {
             $table->addRow();
@@ -125,7 +123,6 @@ class GenerarWord extends Controller
                 $table->addCell(8000, array('valign' => 'center'))->addText($text2, array('bold' => false, 'italic' => false, 'size' => 11), 'p4Style');
             }
         }
-
 
         if ($comodatos->contratoFunc == 1) {
 
@@ -188,7 +185,6 @@ class GenerarWord extends Controller
 
         }
 
-
         $table = $section->addTable();
         for ($r = 1; $r <= 1; $r++) {
             $table->addRow();
@@ -215,9 +211,10 @@ class GenerarWord extends Controller
 
         $escribir = \PhpOffice\PhpWord\IOFactory::createWriter($word, 'Word2007');
 
-        $escribir->save(storage_path('COMODATO_'.$comodatos->idComod."_RUT_".$comodatos->rutFunc.'-UI.docx'));
+        $escribir->save(storage_path('COMODATO_' . $comodatos->idComod . "_RUT_" . $comodatos->rutFunc . '-UI.docx'));
 
-        return response()->download(storage_path('COMODATO_'.$comodatos->idComod."_RUT_".$comodatos->rutFunc.'-UI.docx'));
+        return response()->download(storage_path('COMODATO_' . $comodatos->idComod . "_RUT_" . $comodatos->rutFunc . '-UI.docx'));
 
     }
+
 }

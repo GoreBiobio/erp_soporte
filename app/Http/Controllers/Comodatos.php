@@ -29,6 +29,21 @@ class Comodatos extends Controller
         ]);
     }
 
+    public function enlazar_software()
+    {
+
+        $soft_disponible = DB::table('softwares')
+            ->where([
+                ['comodatoSoft', null],
+            ])
+            ->join('tipos','tipos.idTipo','softwares.tipoBSoft')
+            ->get();
+
+        return view('back_end.comodatos.enlazarSoft', [
+            's_w' => $soft_disponible
+        ]);
+    }
+
     public function enlazar_equipos_pasouno(Request $request)
     {
 
@@ -129,12 +144,12 @@ class Comodatos extends Controller
 
         $comodatos = DB::table('comodatos')
             ->where('funcRecibeComod', $idFuncionario)
-            ->join('hardwares','hardwares.idHard', 'comodatos.hardwares_idHard')
+            ->join('hardwares', 'hardwares.idHard', 'comodatos.hardwares_idHard')
             ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
             ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
             ->get();
 
-        return view('back_end.comodatos.por_funcionarios',[
+        return view('back_end.comodatos.por_funcionarios', [
             'comodatos' => $comodatos
         ]);
 
