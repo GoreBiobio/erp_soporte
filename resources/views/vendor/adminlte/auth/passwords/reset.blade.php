@@ -11,7 +11,7 @@
     <div id="app">
         <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+            <center><img src="/img/logo.png" alt=""></center>
         </div><!-- /.login-logo -->
 
         @if (session('status'))
@@ -32,7 +32,7 @@
         @endif
 
         <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte_lang::message.passwordreset') }}</p>
+            <p class="login-box-msg">{{ trans('adminlte_lang::message.passwordreset') }}AA</p>
             <form action="{{ url('/password/reset') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="token" value="{{ $token }}">

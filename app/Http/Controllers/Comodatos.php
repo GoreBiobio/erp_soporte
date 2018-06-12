@@ -77,6 +77,27 @@ class Comodatos extends Controller
 
     }
 
+    public function enlazar_software_pasouno(Request $request)
+    {
+
+        $idSoftware = $request->input('idSoft');
+
+        $funcionarios = DB::table('funcionarios')
+            ->where('motivoBajaFunc', '=', null)
+            ->OrderBy('paternoFunc')
+            ->get();
+
+        $ficha_soft = DB::table('softwares')
+            ->where('idSoft', '=', $idSoftware)
+            ->first();
+
+        return view('back_end.comodatos.fichaSoftware', [
+            'fic_soft' => $ficha_soft,
+            'func' => $funcionarios
+        ]);
+
+    }
+
     public function guardar_nuevo(Request $request)
     {
 
@@ -113,6 +134,14 @@ class Comodatos extends Controller
 
         return $this->enlazar_equipos();
     }
+
+    public function guardar_nuevo_sw(Request $request)
+    {
+
+
+
+    }
+
 
     public function auditar()
     {

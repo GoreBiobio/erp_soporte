@@ -32,7 +32,7 @@
                             <td>
                                 <form action="/Comodatos/EnlazarSoftPasoUno" method="POST">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="idHard" value="{{ $s_w -> idSoft }}">
+                                    <input type="hidden" name="idSoft" value="{{ $s_w -> idSoft }}">
                                     <button type="submit" class="btn btn-success btn-xs"><i
                                                 class="fa fa-cubes"></i> {{ $s_w -> nombreSoft }}</button>
                                 </form>

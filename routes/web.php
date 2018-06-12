@@ -36,6 +36,10 @@ route::get('/Comodatos/Auditar', 'Comodatos@auditar');
 route::post('/Comodatos/porFuncionario','Comodatos@por_funcionario');
 
 Route::get('/Comodatos/EnlazarSoft', 'Comodatos@enlazar_software');
+Route::post('/Comodatos/EnlazarSoftPasoUno','Comodatos@enlazar_software_pasouno');
+Route::post('/Comodatos/GuardarSW', 'Comodatos@guardar_nuevo_sw');
+
+
 
 
 //Rutas Módulo de Generar Word
