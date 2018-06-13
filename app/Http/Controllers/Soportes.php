@@ -56,8 +56,8 @@ class Soportes extends Controller
             ])
             ->get();
 
-        $mis_soportes = DB::table('solicitudSoportes')
-            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudSoportes.funcSolicSop')
+        $mis_soportes = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where('funcRespoSop','=', Auth::user()->idFuncUser)
             ->get();
 
@@ -110,8 +110,8 @@ class Soportes extends Controller
     public function gestion_soporte()
     {
 
-        $soportes =  $soportes = DB::table('solicitudSoportes')
-            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudSoportes.funcSolicSop')
+        $soportes =  $soportes = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where('funcRespoSop','=',null)
             ->get();
 
