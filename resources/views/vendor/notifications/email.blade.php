@@ -51,13 +51,14 @@
 {{-- Subcopy --}}
 @isset($actionText)
 @component('mail::subcopy')
-@lang(
-    "Si tiene problemas para hacer clic en el \":actionText\" boton, copie y pegue la siguiente URL en su navegador web: [:actionURL](:actionURL)',
-    [
-        'actionText' => $actionText,
-        'actionURL' => $actionUrl
-    ]
-)
+    @lang(
+        "Si tiene problemas para hacer clic en \":actionText\" botón, copiar y pegar la URL a continuación\n".
+        'en su navegador web: [:actionURL](:actionURL)',
+        [
+            'actionText' => $actionText,
+            'actionURL' => $actionUrl
+        ]
+    )
 @endcomponent
 @endisset
 @endcomponent
