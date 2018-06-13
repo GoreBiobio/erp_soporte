@@ -45,7 +45,7 @@ class GenerarWord extends Controller
         for ($r = 1; $r <= 1; $r++) {
             $table->addRow();
             for ($c = 1; $c <= 1; $c++) {
-                $table->addCell(500)->addImage('img\gore.jpg', array(
+                $table->addCell(500)->addImage('https://upload.wikimedia.org/wikipedia/commons/d/df/GORE-BIOBIO.jpg', array(
                         'width' => 60,
                         'height' => 80,
                         'marginTop' => -1,
