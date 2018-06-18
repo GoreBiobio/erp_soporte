@@ -94,12 +94,12 @@
                         <div class="form-group">
                             <div class="col-md-6">
                                 <label for="telefono">Detalle Solicitud:</label>
-                                <textarea class="form-control" name="DetSol" rows="3" placeholder="Enter ..."></textarea>
+                                <textarea class="form-control" name="DetSol" rows="3" placeholder="Ingrese el detalle de la solicitud del funcionario." required></textarea>
                             </div>
 
                             <div class="col-md-6">
                                 <label for="telefono">Observaciones Solicitud:</label>
-                                <textarea class="form-control" name="ObsSol" rows="3" placeholder="Enter ..."></textarea>
+                                <textarea class="form-control" name="ObsSol" rows="3" placeholder="Observaciones internas unidad de informática acerca de la solicitud"></textarea>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -109,30 +109,6 @@
                     </form>
             </div>
             <!-- /.box-body -->
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">Gestión Avanzada Inventario</h3>
-            </div>
-            <div class="box-body">
-                <a class="btn btn-app">
-                    <i class="fa fa-edit"></i> Edit
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-play"></i> Play
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-repeat"></i> Repeat
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-pause"></i> Pause
-                </a>
-                <a class="btn btn-app">
-                    <i class="fa fa-save"></i> Save
-                </a>
-            </div>
         </div>
     </div>
 
@@ -150,7 +126,7 @@
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Equipo</th>
                         <th>Motivo Solicitud</th>
-                        <th>Detalle de la Solicitud</th>
+                        <th>Obs de la Solicitud</th>
                         <th>Nivel Crítico</th>
                         <th>Estado Actual</th>
                     </tr>
@@ -159,7 +135,14 @@
                     @foreach($m_sop as $listadoSop)
                         <tr>
                             <td>
-                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP - {{ $listadoSop -> idSolSop }}</a></center>
+                                <center>
+                                    <form action="/Soporte/Ficha" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-eye"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
+                                    </form>
+                                </center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> fecCreaSop }}</center>

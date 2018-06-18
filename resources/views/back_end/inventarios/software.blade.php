@@ -21,12 +21,12 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <label for="paterno">Nombre Software: (O Folio Interno)</label>
-                            <input type="text" name="NomSoft" class="form-control" placeholder="Nombre Tipo">
+                            <label for="paterno">Nombre Software: </label>
+                            <input type="text" name="NomSoft" class="form-control" placeholder="Nombre del Software" required>
                         </div>
                         <div class="col-md-4">
                             <label for="materno">Fecha Caducidad Licencia:</label>
-                            <input type="date" name="fecCadSoft" class="form-control" placeholder="N° Serie Fábrica">
+                            <input type="date" name="fecCadSoft" class="form-control">
                         </div>
                     </div>
 
@@ -58,11 +58,11 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-7">
+                        <div class="col-md-9">
                             <label for="telefono">Detalle:</label>
                             <input type="text" name="ObsSoft" class="form-control"
                                    placeholder="Detalle Software (Servidor, Rutas, Etc)."
-                                   maxlength="50">
+                                   maxlength="50" required>
                         </div>
                     </div>
 

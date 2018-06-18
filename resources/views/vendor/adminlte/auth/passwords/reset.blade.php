@@ -32,7 +32,7 @@
             @endif
 
             <div class="login-box-body">
-                <p class="login-box-msg">REESTABLECER CONTRASEÑA</p>
+                <p class="login-box-msg"><strong>REESTABLECER CONTRASEÑA</strong></p>
                 <form action="{{ url('/password/reset') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="token" value="{{ $token }}">

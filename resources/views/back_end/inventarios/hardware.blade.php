@@ -26,11 +26,11 @@
                         </div>
                         <div class="col-md-4">
                             <label for="paterno">Nombre Hardware: (O Folio Interno)</label>
-                            <input type="text" name="NomHard" class="form-control" placeholder="Nombre Tipo">
+                            <input type="text" name="NomHard" class="form-control" placeholder="Nombre Tipo" required>
                         </div>
                         <div class="col-md-3">
                             <label for="materno">N° de Serie:</label>
-                            <input type="text" name="NumSerie" class="form-control" placeholder="N° Serie Fábrica">
+                            <input type="text" name="NumSerie" class="form-control" placeholder="N° Serie Fábrica" required>
                         </div>
                         <div class="col-md-3">
                             <label for="nombres">IMEI: (Teléfonos / Tablets)</label>

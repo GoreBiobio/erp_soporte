@@ -49,33 +49,36 @@ class Funcionarios extends Controller
 
     public function guardar_funcionario(Request $request)
     {
+        try {
+            $fecha = new DateTime;
+            $rutFunc = $request->input('RutFunc');
+            $paternoFunc = $request->input('PaternoFunc');
+            $maternoFunc = $request->input('MaternoFunc');
+            $nombresFunc = $request->input('NombreFunc');
+            $correoFunc = $request->input('EmailFunc');
+            $anexoFunc = $request->input('AnexoFunc');
+            $fonoFunc = $request->input('TelefonoFunc');
+            $tipoContratoFunc = $request->input('TipoContratoFunc');
+            $estadoFunc = $request->input('EstadoFunc');
+            $deptoFunc = $request->input('IdDepto');
 
-        $fecha = new DateTime;
-        $rutFunc = $request->input('RutFunc');
-        $paternoFunc = $request->input('PaternoFunc');
-        $maternoFunc = $request->input('MaternoFunc');
-        $nombresFunc = $request->input('NombreFunc');
-        $correoFunc = $request->input('EmailFunc');
-        $anexoFunc = $request->input('AnexoFunc');
-        $fonoFunc = $request->input('TelefonoFunc');
-        $tipoContratoFunc = $request->input('TipoContratoFunc');
-        $estadoFunc = $request->input('EstadoFunc');
-        $deptoFunc = $request->input('IdDepto');
+            DB::table('funcionarios')->insert([
+                'fecCreaFunc' => $fecha,
+                'rutFunc' => $rutFunc,
+                'paternoFunc' => $paternoFunc,
+                'maternoFunc' => $maternoFunc,
+                'nombresFunc' => $nombresFunc,
+                'correoFunc' => $correoFunc,
+                'anexoFunc' => $anexoFunc,
+                'fonoFunc' => $fonoFunc,
+                'contratoFunc' => $tipoContratoFunc,
+                'estadoFunc' => $estadoFunc,
+                'departamentos_idDepto' => $deptoFunc
+            ]);
 
-        DB::table('funcionarios')->insert([
-            'fecCreaFunc' => $fecha,
-            'rutFunc' => $rutFunc,
-            'paternoFunc' => $paternoFunc,
-            'maternoFunc' => $maternoFunc,
-            'nombresFunc' => $nombresFunc,
-            'correoFunc' => $correoFunc,
-            'anexoFunc' => $anexoFunc,
-            'fonoFunc' => $fonoFunc,
-            'contratoFunc' => $tipoContratoFunc,
-            'estadoFunc' => $estadoFunc,
-            'departamentos_idDepto' => $deptoFunc
-        ]);
-
+            return redirect('/Funcionarios/Nuevo')->with('status', '¡Usuario Agregado!');
+            } catch (\Illuminate\Database\QueryException $ex) {
+            return redirect('/Funcionarios/Nuevo')->with('error', '¡Error, No se pudo agregar el nuevo usuario, verifique el el funcionario no se encuentre ya ingresado!');
+        }
     }
-
 }

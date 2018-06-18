@@ -9,6 +9,17 @@
     / Gestión
 @endsection
 @section('main-content')
+
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @elseif(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="col-md-8">
         <div class="box box-success">
             <div class="box-header with-border">
@@ -16,7 +27,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                <form role="form" action="/Funcionarios/Guardar" method="POST" class="form-horizontal">
+                <form role="form" action="/Funcionarios/Guardar" name="form1" method="POST" class="form-horizontal">
                     <!-- text input -->
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
@@ -26,11 +37,13 @@
                         </div>
                         <div class="col-md-3">
                             <label for="paterno">Paterno:</label>
-                            <input type="text" name="PaternoFunc" class="form-control" placeholder="Apellido Paterno" required>
+                            <input type="text" name="PaternoFunc" class="form-control" placeholder="Apellido Paterno"
+                                   required>
                         </div>
                         <div class="col-md-3">
                             <label for="materno">Materno:</label>
-                            <input type="text" name="MaternoFunc" class="form-control" placeholder="Apellido Materno" required>
+                            <input type="text" name="MaternoFunc" class="form-control" placeholder="Apellido Materno"
+                                   required>
                         </div>
                         <div class="col-md-3">
                             <label for="nombres">Nombres:</label>
@@ -41,12 +54,14 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             <label for="correo">Correo Electrónico:</label>
-                            <input type="email" name="EmailFunc" class="form-control" placeholder="Correo Electrónico Institucional"
+                            <input type="email" name="EmailFunc" class="form-control"
+                                   placeholder="Correo Electrónico Institucional"
                                    required>
                         </div>
                         <div class="col-md-3">
                             <label for="telefono">Teléfono:</label>
-                            <input type="text" name="TelefonoFunc" class="form-control" placeholder="Teléfono Personal" required>
+                            <input type="text" name="TelefonoFunc" class="form-control" placeholder="Teléfono Personal"
+                                   required>
                         </div>
                         <div class="col-md-2">
                             <label for="anexo">Anexo Interno:</label>
@@ -129,7 +144,8 @@
                             <td>{{ $funcionarios -> rutFunc }}</td>
                             <td>{{ $funcionarios -> paternoFunc }} {{ $funcionarios -> maternoFunc }}
                                 , {{ $funcionarios -> nombresFunc }}</td>
-                            <td><a href="mailto:{{ $funcionarios -> correoFunc }}">{{ $funcionarios -> correoFunc}} </a> / {{ $funcionarios -> anexoFunc  }}</td>
+                            <td><a href="mailto:{{ $funcionarios -> correoFunc }}">{{ $funcionarios -> correoFunc}} </a>
+                                / {{ $funcionarios -> anexoFunc  }}</td>
                             <td>{{ $funcionarios -> division }} - {{ $funcionarios -> departamento }}</td>
                             <td>
                                 <center>
@@ -155,6 +171,5 @@
                 </table>
             </div>
         </div>
-        <!-- /.box-body -->
     </div>
 @endsection

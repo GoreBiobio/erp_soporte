@@ -11,9 +11,9 @@
                     <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
                 </div>
                 <div class="pull-left info">
-                    <p>{{ Auth::user()->name }}</p>
+                    <p><small><small>{{ Auth::user()->name }}</small></small></p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> {{ trans('adminlte_lang::message.online') }}
+                    <a href="#"><i class="fa fa-circle text-success"></i> Habilitado
                     </a>
                 </div>
             </div>
@@ -77,6 +77,7 @@
                 <ul class="treeview-menu">
                     <li><a href="/Soporte/Nuevo">Nuevo Soporte</a></li>
                     <li><a href="/Soporte/Gestion">Gestionar Soportes</a></li>
+                    <li><a href="/Soporte/Archivo">Archivo Soportes</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -85,14 +86,15 @@
                 <ul class="treeview-menu">
                     <li><a href="/Mantencion/Nuevo">Nueva Mantención</a></li>
                     <li><a href="/Mantencion/Gestion">Gestionar Mantenciones</a></li>
+                    <li><a href="/Mantencion/Archivo">Archivo Mantenciones</a></li>
                 </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-user-secret'></i> <span>Jefatura</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="#">Archivo</a></li>
+                    <li><a href="#">Reportes</a></li>
                 </ul>
             </li>
             <li class="header">GENERAL</li>
@@ -100,8 +102,7 @@
                 <a href="#"><i class='fa fa-gears'></i> <span>Configuraciones</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
+                    <li><a href="#">General</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

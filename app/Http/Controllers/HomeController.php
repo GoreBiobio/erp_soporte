@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use DB;
 
 /**
  * Class HomeController
@@ -33,6 +34,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+
+        $num_sop = DB::table('solicitudsoportes')
+            ->where('estadoSop','<>','Cerrado')
+            ->count();
+
+        $num_mant = DB::table('solicitudmantenciones')
+            ->where('estadoMant','<>','Cerrado')
+            ->count();
+
+
+        return view('adminlte::home',[
+            'num_sop' => $num_sop,
+            'num_mant' => $num_mant
+        ]);
     }
 }

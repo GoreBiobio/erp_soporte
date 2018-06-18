@@ -13,7 +13,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Listado de Soportes NO Asignados</h3>
+                <h3 class="box-title">SOPORTES SIN EJECUTAR</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -34,19 +34,22 @@
                     @foreach($listadoSop as $listadoSop)
                         <tr>
                             <td>
-                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP - {{ $listadoSop -> idSolSop }}</a></center>
+                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP
+                                        - {{ $listadoSop -> idSolSop }}</a></center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> fecCreaSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> paternoFunc }}, {{ $listadoSop -> nombresFunc }} / Anexo: {{ $listadoSop -> anexoFunc }} - Equipo: {{ $listadoSop -> hardSop }}</center>
+                                <center>{{ $listadoSop -> paternoFunc }}, {{ $listadoSop -> nombresFunc }} /
+                                    Anexo: {{ $listadoSop -> anexoFunc }} -
+                                    Equipo: {{ $listadoSop -> hardSop }}</center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> tipoSopB }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> obsSoftSop }}</center>
+                                <center>{{ $listadoSop -> solicitudSop }}</center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> tipoSopD }}</center>
@@ -55,7 +58,71 @@
                                 <center>{{ $listadoSop -> estadoSop }}</center>
                             </td>
                             <td>
-                                <center><a class="btn btn-primary btn-xs"><i class="fa fa-coffee"></i> TOMAR</a></center>
+                                <center>
+                                    <a class="btn btn-primary btn-xs"><i class="fa fa-hand-rock-o"></i> TOMAR</a>
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">MIS SOPORTES PENDIENTES</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID Soporte</th>
+                        <th>Fecha/Hora Solicitud</th>
+                        <th>Usuario - Equipo</th>
+                        <th>Motivo Solicitud</th>
+                        <th>Detalle de la Solicitud</th>
+                        <th>Nivel Crítico</th>
+                        <th>Estado Actual</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($sop_pend as $sop_pend)
+                        <tr>
+                            <td>
+                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP
+                                        - {{ $sop_pend -> idSolSop }}</a></center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> fecCreaSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> paternoFunc }}, {{ $sop_pend -> nombresFunc }} /
+                                    Anexo: {{ $sop_pend -> anexoFunc }} -
+                                    Equipo: {{ $sop_pend -> hardSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> tipoSopB }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> obsSoftSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> tipoSopD }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $sop_pend -> estadoSop }}</center>
+                            </td>
+                            <td>
+                                <center>
+                                    <a class="btn btn-warning btn-xs"><i class="fa fa-search"></i> DETALLE</a>
+                                    <a class="btn btn-danger btn-xs"><i class="fa fa-close"></i> CERRAR</a>
+                                </center>
                             </td>
                         </tr>
                     @endforeach

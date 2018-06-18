@@ -110,13 +110,40 @@ class Soportes extends Controller
     public function gestion_soporte()
     {
 
-        $soportes =  $soportes = DB::table('solicitudsoportes')
+        $soportes = DB::table('solicitudsoportes')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where('funcRespoSop','=',null)
             ->get();
 
+        $sop_pend = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
+            ->where('funcRespoSop','=', Auth::id())
+            ->get();
+
         return view('back_end.soportes.gestion', [
-            'listadoSop' => $soportes
+            'listadoSop' => $soportes,
+            'sop_pend' => $sop_pend
+        ]);
+
+    }
+
+    public function archivo_soporte(){
+
+        return view('back_end.soportes.archivo');
+
+    }
+
+    public function ficha_soporte(Request $request){
+
+        $id_soporte = $request->input('idSoporte');
+
+        $soporte = DB::table('solicitudsoportes')
+            ->join('funcionarios','funcionarios.idFunc','solicitudsoportes.funcSolicSop')
+            ->where('idSolSop','=',$id_soporte)
+            ->first();
+
+        return view('back_end.soportes.ficha_soporte',[
+            'soporte' => $soporte
         ]);
 
     }

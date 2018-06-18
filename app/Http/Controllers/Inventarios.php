@@ -192,6 +192,15 @@ class Inventarios extends Controller
             ->OrderBy('nombreTipo')
             ->get();
 
+        $tipos_sw = DB::table('tipos')
+            ->where([
+                ['nivelTipo', 'Software'],
+                ['subnivelTipo', 'Interno'],
+                ['estadoTipo', 'Activa']
+            ])
+            ->OrderBy('nombreTipo')
+            ->get();
+
         $usos = DB::table('estados')
             ->where([
                 ['nivelEstado', 'Hardware'],
@@ -209,6 +218,7 @@ class Inventarios extends Controller
         return view('back_end.inventarios.auditar',[
             'cajas' => $cajas,
             'tipos' => $tipos,
+            'tipos_sw' => $tipos_sw,
             'usos' => $usos,
             'funcionarios' => $funcionarios
         ]);
