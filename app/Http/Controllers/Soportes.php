@@ -58,7 +58,7 @@ class Soportes extends Controller
 
         $mis_soportes = DB::table('solicitudsoportes')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
-            ->where('funcRespoSop','=', Auth::user()->idFuncUser)
+            ->where('funcRespoSop', '=', Auth::user()->idFuncUser)
             ->get();
 
         return view('back_end.soportes.nuevo', [
@@ -112,12 +112,15 @@ class Soportes extends Controller
 
         $soportes = DB::table('solicitudsoportes')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
-            ->where('funcRespoSop','=',null)
+            ->where('funcRespoSop', '=', null)
             ->get();
 
         $sop_pend = DB::table('solicitudsoportes')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
-            ->where('funcRespoSop','=', Auth::id())
+            ->where([
+                ['funcRespoSop','=', Auth::user()->idFuncUser],
+                ['estadoSop', '<>', 'Cerrado']
+            ])
             ->get();
 
         return view('back_end.soportes.gestion', [
@@ -127,25 +130,75 @@ class Soportes extends Controller
 
     }
 
-    public function archivo_soporte(){
+    public function archivo_soporte()
+    {
 
-        return view('back_end.soportes.archivo');
+        $sop_arc = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
+            ->where([
+                ['funcRespoSop', '=', Auth::user()->idFuncUser],
+                ['estadoSop', '=', 'Cerrado'],
+            ])
+            ->get();
+
+        return view('back_end.soportes.archivo', [
+            'sop_arc' => $sop_arc
+        ]);
 
     }
 
-    public function ficha_soporte(Request $request){
+    public function ficha_soporte(Request $request)
+    {
 
         $id_soporte = $request->input('idSoporte');
 
         $soporte = DB::table('solicitudsoportes')
-            ->join('funcionarios','funcionarios.idFunc','solicitudsoportes.funcSolicSop')
-            ->where('idSolSop','=',$id_soporte)
+            ->join('funcionarios', 'funcionarios.idFunc', 'solicitudsoportes.funcSolicSop')
+            // ->join('users', 'users.idFuncUser', 'solicitudsoportes.funcRespoSop')
+            ->where('idSolSop', '=', $id_soporte)
             ->first();
 
-        return view('back_end.soportes.ficha_soporte',[
+        return view('back_end.soportes.ficha_soporte', [
             'soporte' => $soporte
         ]);
 
+    }
+
+    public function observaciones(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSop'))
+            ->update([
+                'obsSoftSop' => $request->input('ObsSop')
+            ]);
+
+        return redirect('/Soporte/Gestion');
+
+    }
+
+    public function cerrar(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSop'))
+            ->update([
+                'estadoSop' => 'Cerrado'
+            ]);
+
+        return redirect('/Soporte/Gestion');
+    }
+
+    public function tomar(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSoporte'))
+            ->update([
+                'funcRespoSop' => Auth::user()->idFuncUser
+            ]);
+
+        return redirect('/Soporte/Gestion');
     }
 
 }

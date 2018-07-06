@@ -59,7 +59,6 @@
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="/Inventarios/Hardware">Gestión Hardware</a></li>
-                    <li><a href="/Inventarios/Software">Gestión Software</a></li>
                     <li><a href="/Inventarios/Auditar">Auditar Inventario</a></li>
                 </ul>
             </li>
@@ -68,7 +67,6 @@
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="/Comodatos/EnlazarHard">Enlazar Hardware / Persona</a></li>
-                    <li><a href="/Comodatos/EnlazarSoft">Enlazar Software / Persona</a></li>
                     <li><a href="/Comodatos/Auditar">Auditar Comodatos</a></li>
                 </ul>
             </li>
@@ -81,20 +79,10 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-wrench'></i> <span>Mantenciones</span> <i
+                <a href="#"><i class='fa fa-info'></i> <span>Incidencias</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="/Mantencion/Nuevo">Nueva Mantención</a></li>
-                    <li><a href="/Mantencion/Gestion">Gestionar Mantenciones</a></li>
-                    <li><a href="/Mantencion/Archivo">Archivo Mantenciones</a></li>
-                </ul>
-            </li>
-            <li class="treeview">
-                <a href="#"><i class='fa fa-user-secret'></i> <span>Jefatura</span> <i
-                            class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">Archivo</a></li>
-                    <li><a href="#">Reportes</a></li>
+                    <li><a href="/Incidencia/Nuevo">Gestión Incidencia</a></li>
                 </ul>
             </li>
             <li class="header">GENERAL</li>
@@ -102,7 +90,7 @@
                 <a href="#"><i class='fa fa-gears'></i> <span>Configuraciones</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">General</a></li>
+                    <li><a href="/Proximamente">General</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

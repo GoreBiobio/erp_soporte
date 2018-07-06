@@ -91,44 +91,5 @@
             <!-- /.box -->
         </div>
 
-        <div class="col-md-3">
-            <div class="box box-warning box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Mostrar Software por Tipo</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                    <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <p>Muestra software según tipo <strong>(Carpetas Compartidas / Correo Electrónico / Etc)</strong>
-                    </p>
-                    <hr>
-                    <form action="/Inventarios/SWporTipo" method="POST">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <div>
-                            <label for="tc">Tipo Software:</label>
-                            <select class="form-control" name="VerTipo">
-                                @foreach($tipos_sw as $tipos_sw)
-                                    <option value="{{ $tipos_sw -> nombreTipo }}">{{ $tipos_sw -> nombreTipo }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <hr>
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-primary pull-right">Revisar por Tipo</button>
-                        </div>
-                    </form>
-                    <br>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-        </div>
-
     </div>
 @endsection

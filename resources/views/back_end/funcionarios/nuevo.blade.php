@@ -67,6 +67,15 @@
                             <label for="anexo">Anexo Interno:</label>
                             <input type="number" name="AnexoFunc" class="form-control">
                         </div>
+                        <div class="col-md-2">
+                            <label for="anexo">Jefatura:</label>
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="jefatura" value="jefatura">
+                                    CLIC JEFATURA
+                                </label>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-3">
@@ -110,10 +119,10 @@
                 <h3 class="box-title">Gestión Avanzada Funcionario</h3>
             </div>
             <div class="box-body">
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-circle-o text-green"></i> Divisiones
                 </a>
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-circle-o text-green"></i> Departamentos
                 </a>
             </div>
@@ -135,13 +144,19 @@
                         <th>Correo Electrónico - Anexo</th>
                         <th>Departamento - Ubicación</th>
                         <th>Estado</th>
-                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($funcionarios as $funcionarios)
                         <tr>
-                            <td>{{ $funcionarios -> rutFunc }}</td>
+                            <td>
+                                <form action="/Funcionario/Ficha" method="POST">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="idFuncionario" value="{{ $funcionarios -> idFunc }}">
+                                    <button type="submit" class="btn btn-primary btn-xs"><i
+                                                class="fa fa-eye"></i> RUT - {{ $funcionarios -> rutFunc }}</button>
+                                </form>
+                            </td>
                             <td>{{ $funcionarios -> paternoFunc }} {{ $funcionarios -> maternoFunc }}
                                 , {{ $funcionarios -> nombresFunc }}</td>
                             <td><a href="mailto:{{ $funcionarios -> correoFunc }}">{{ $funcionarios -> correoFunc}} </a>
@@ -157,12 +172,6 @@
                                         <i class="fa fa-circle-o text-red"></i>
                                     @endif
                                     {{ $funcionarios -> nombreEstado}}
-                                </center>
-                            </td>
-                            <td>
-                                <center>
-                                    <a class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></a>
-                                    <a class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i></a>
                                 </center>
                             </td>
                         </tr>

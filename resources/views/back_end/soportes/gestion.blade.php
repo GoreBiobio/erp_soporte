@@ -34,8 +34,14 @@
                     @foreach($listadoSop as $listadoSop)
                         <tr>
                             <td>
-                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP
-                                        - {{ $listadoSop -> idSolSop }}</a></center>
+                                <center>
+                                    <form action="/Soporte/Ficha" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-eye"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
+                                    </form>
+                                </center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> fecCreaSop }}</center>
@@ -59,7 +65,12 @@
                             </td>
                             <td>
                                 <center>
-                                    <a class="btn btn-primary btn-xs"><i class="fa fa-hand-rock-o"></i> TOMAR</a>
+                                    <form action="/Soporte/Tomar" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
+                                        <button type="submit" class="btn btn-primary btn-xs"><i
+                                                    class="fa fa-hand-o-right"></i> TOMAR</button>
+                                    </form>
                                 </center>
                             </td>
                         </tr>
@@ -88,15 +99,20 @@
                         <th>Detalle de la Solicitud</th>
                         <th>Nivel Crítico</th>
                         <th>Estado Actual</th>
-                        <th>Acciones</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($sop_pend as $sop_pend)
                         <tr>
                             <td>
-                                <center><a class="btn btn-success btn-xs"><i class="fa fa-eye"></i> SOP
-                                        - {{ $sop_pend -> idSolSop }}</a></center>
+                                <center>
+                                    <form action="/Soporte/Ficha" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $sop_pend -> idSolSop }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-eye"></i> SOP ID - {{ $sop_pend -> idSolSop }}</button>
+                                    </form>
+                                </center>
                             </td>
                             <td>
                                 <center>{{ $sop_pend -> fecCreaSop }}</center>
@@ -110,19 +126,13 @@
                                 <center>{{ $sop_pend -> tipoSopB }}</center>
                             </td>
                             <td>
-                                <center>{{ $sop_pend -> obsSoftSop }}</center>
+                                <center>{{ $sop_pend -> solicitudSop }}</center>
                             </td>
                             <td>
                                 <center>{{ $sop_pend -> tipoSopD }}</center>
                             </td>
                             <td>
                                 <center>{{ $sop_pend -> estadoSop }}</center>
-                            </td>
-                            <td>
-                                <center>
-                                    <a class="btn btn-warning btn-xs"><i class="fa fa-search"></i> DETALLE</a>
-                                    <a class="btn btn-danger btn-xs"><i class="fa fa-close"></i> CERRAR</a>
-                                </center>
                             </td>
                         </tr>
                     @endforeach

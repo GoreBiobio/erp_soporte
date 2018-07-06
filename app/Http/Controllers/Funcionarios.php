@@ -60,6 +60,12 @@ class Funcionarios extends Controller
             $fonoFunc = $request->input('TelefonoFunc');
             $tipoContratoFunc = $request->input('TipoContratoFunc');
             $estadoFunc = $request->input('EstadoFunc');
+            $jefatura = $request->input('jefatura');
+            if ($jefatura == 'jefatura') {
+                $jefatura = 'SI';
+            } else {
+                $jefatura = 'NO';
+            }
             $deptoFunc = $request->input('IdDepto');
 
             DB::table('funcionarios')->insert([
@@ -73,12 +79,46 @@ class Funcionarios extends Controller
                 'fonoFunc' => $fonoFunc,
                 'contratoFunc' => $tipoContratoFunc,
                 'estadoFunc' => $estadoFunc,
+                'jefatura' => $jefatura,
                 'departamentos_idDepto' => $deptoFunc
             ]);
 
             return redirect('/Funcionarios/Nuevo')->with('status', '¡Usuario Agregado!');
-            } catch (\Illuminate\Database\QueryException $ex) {
+        } catch (\Illuminate\Database\QueryException $ex) {
             return redirect('/Funcionarios/Nuevo')->with('error', '¡Error, No se pudo agregar el nuevo usuario, verifique el el funcionario no se encuentre ya ingresado!');
         }
     }
+
+    public function ficha_funcionario(Request $request)
+    {
+
+        $id = $request->input('idFuncionario');
+
+        $func = DB::table('funcionarios')
+            ->where('idFunc','=', $id)
+            ->first();
+
+        $comodatos = DB::table('comodatos')
+            ->where('funcRecibeComod', '=', $id)
+            ->join('users', 'users.idFuncUser', 'comodatos.funcEntregaComod')
+            ->join('hardwares', 'hardwares.idHard','comodatos.hardwares_idHard')
+            ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
+            ->get();
+
+        $soportes = DB::table('solicitudsoportes')
+            ->where('funcSolicSop', '=', $id)
+            ->join('hardwares', 'hardwares.idHard','solicitudsoportes.hardSop')
+            ->join('modelos', 'modelos.idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'marcas.idMarca', '=', 'modelos.marcas_idMarca')
+            ->get();
+
+        return view('back_end.funcionarios.ficha_funcionario', [
+            'comodatos' => $comodatos,
+            'soportes' => $soportes,
+            'funcionario' => $func
+        ]);
+
+    }
+
 }

@@ -16,12 +16,17 @@
         <div class="row">
             <div class="col-xs-12">
                 <h4 class="page-header">
-                    <i class="fa fa-user"></i> ID SOPORTE: {{ $soporte -> idSolSop }}
+                    <small><i class="fa fa-user"></i> <strong>ID SOPORTE:</strong> {{ $soporte -> idSolSop }}</small>
+                </h4>
+                <h4>
                     <small class="pull-right">Fecha de Solicitud: {{ $soporte -> fecCreaSop }}</small>
                 </h4>
             </div>
-            <!-- /.col -->
         </div>
+
+        <h5><strong>ESTADO ACTUAL: </strong>{{ $soporte->estadoSop }}</h5>
+
+        <br>
         <!-- info row -->
         <div class="row invoice-info">
             <div class="col-sm-4 invoice-col">
@@ -69,7 +74,7 @@
 
             <div class="col-xs-6">
                 <p class="lead">
-                    <small>Observaciones Soporte:</small>
+                    <small>Observaciones de Cierre Soporte:</small>
                 </p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
@@ -77,24 +82,31 @@
                 </p>
             </div>
             <!-- /.col -->
-            <div class="col-xs-6">
-                <p class="lead">
-                    <small>Opciones de Soporte:</small>
-                </p>
-
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalObs"><i
-                            class="fa fa-pencil"></i> OBSERVACIONES
-                </button>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalCierre"><i
-                            class="fa fa-close"></i> CERRAR TICKET SOPORTE
-                </button>
-
-                </p>
-            </div>
-
-
-            <!-- /.col -->
         </div>
+
+        @if($soporte -> estadoSop == 'Cerrado')
+
+        @else
+            <div class="col-xs-6 no-print">
+                <p class="lead">
+                    <small>Opciones de Cierre Soporte:</small>
+                </p>
+
+                @if($soporte ->funcRespoSop == null )
+                @else
+                    <button type="button" class="btn-sm btn-success" data-toggle="modal" data-target="#ModalObs"><i
+                                class="fa fa-pencil"></i> OBSERVACIONES
+                    </button>
+                    @if($soporte ->obsSoftSop == null )
+                    @else
+                        <button type="button" class="btn-sm btn-danger" data-toggle="modal" data-target="#ModalCierre">
+                            <i
+                                    class="fa fa-close"></i> CERRAR TICKET SOPORTE
+                        </button>
+                    @endif
+                @endif
+            </div>
+        @endif
 
         <div class="row">
             <div class="col-xs-12 table-responsive">
@@ -104,7 +116,7 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>ID LOG</th>
+                        <th>Id Log</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
                     </tr>
@@ -127,14 +139,41 @@
         <div class="row no-print">
 
             <div class="col-xs-12">
-                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i>
+                <a href='javascript:window.print();' target="_blank" target="_blank" class="btn btn-default"><i
+                            class="fa fa-print"></i>
                     Imprimir Ficha</a>
             </div>
         </div>
-    </section>
-    <!-- /.content -->
 
-    <!-- Modal -->
+
+        <hr>
+
+        Certifica,
+        <br><br><br><br><br>
+        <center>
+            <table>
+                <tr>
+                    <td>
+                        <center>_____________________________________</center>
+                        <center></center>
+                        <center><strong>PROFESIONAL UNIDAD INFORMÁTICA</strong></center>
+                        <center>GOBIERNO REGIONAL DEL BÍOBIO</center>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <center>_____________________________________</center>
+                        <center></center>
+                        <center><strong>{{ $soporte->paternoFunc }} {{ $soporte->maternoFunc }}
+                                , {{ $soporte->nombresFunc }}</strong></center>
+                        <center>GOBIERNO REGIONAL DEL BÍOBIO</center>
+                    </td>
+                </tr>
+            </table>
+        </center>
+
+    </section>
 
     <div id="ModalObs" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -149,7 +188,7 @@
                     <form role="form" action="/Soporte/Observaciones" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSop" value="">
+                        <input type="hidden" name="idSop" value="{{ $soporte -> idSolSop }}">
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -186,8 +225,10 @@
                     <form role="form" action="/Soporte/Cierre" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="idSop" value="{{ $soporte -> idSolSop }}">
                         <div class="box-footer">
-                            <center><button type="submit" class="btn btn-danger">Cerrar Ticket de Soporte</button>
+                            <center>
+                                <button type="submit" class="btn btn-danger">Cerrar Ticket de Soporte</button>
                             </center>
                         </div>
                     </form>

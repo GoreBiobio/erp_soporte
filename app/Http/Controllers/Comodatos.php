@@ -115,6 +115,7 @@ class Comodatos extends Controller
         DB::table('comodatos')->insert([
             'fechaIngComod' => $fecCarga,
             'fechaDevEstComod' => $fecDevol,
+            'fechaDevolComod' => $fecDevol,
             'ubicacionEquiposComod' => $ubiqEq,
             'funcRecibeComod' => $funcRecCom,
             'funcEntregaComod' => $funcEntCom,
@@ -130,6 +131,33 @@ class Comodatos extends Controller
             ->update([
                 'estadoHardNA' => 'Usado',
                 'estadoHardNB' => 'En Comodato'
+            ]);
+
+        return $this->enlazar_equipos();
+    }
+
+    public function archivar_comodato(Request $request)
+    {
+
+        $fecAhora = new DateTime;
+        $idHardware = $request->input('idHard');
+        $idComodato = $request->input('idCom');
+
+        // Cambia el estado del Comodato a Archivo y pone la fecha de devolución al Gore.
+
+        DB::table('comodatos')
+            ->where('idComod', '=', $idComodato)
+            ->update([
+               'fechaDevolComod' => $fecAhora,
+                'estadoComod' => 'Archivo'
+            ]);
+
+        // Cambia el estado del Hardware a En Comodato y cambia el estado de hardware a Usado.
+        DB::table('hardwares')
+            ->where('idHard', $idHardware)
+            ->update([
+                'estadoHardNB' => 'Liberado',
+                'cajas_idCaja' => 1
             ]);
 
         return $this->enlazar_equipos();

@@ -25,6 +25,7 @@
                         <th>ESTADO COMODATO</th>
                         <th>FEC. DEVOL ESTIMADA</th>
                         <th>DOCS</th>
+                        <th>Terminar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,13 +36,43 @@
                                 - SERIE: {{ $comodatos ->numSerieHard }} - IMEI: {{ $comodatos -> imeiHard }}</td>
                             <td>{{ $comodatos -> estadoComod }}</td>
                             <td>{{ $comodatos -> fechaDevEstComod }}</td>
-                            <td>
-                                <form action="/Comodatos/GenerarWord" method="POST">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
-                                    <button type="submit" class="btn btn-primary btn-xs"><i
-                                                class="fa fa-file-word-o"></i> Word Comodato</button>
-                                </form>
+                            <td>@if($comodatos -> estadoComod =='Archivo')
+                                    <form action="/Comodatos/GenerarWordDevolucion" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
+                                        <button type="submit" class="btn btn-warning btn-xs"><i
+                                                    class="fa fa-file-word-o"></i> Word Recepcion
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="/Comodatos/GenerarWord" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-file-word-o"></i> Word Entrega
+                                        </button>
+                                    </form>
+                                @endif
+                            </td>
+                            <td>@if($comodatos -> estadoComod =='Archivo')
+                                    <form action="/Comodatos/Terminar" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
+                                        <input type="hidden" name="idHard" value="{{ $comodatos -> hardwares_idHard }}">
+                                        <button type="submit" class="btn btn-danger btn-xs" disabled><i
+                                                    class="fa fa-close"></i> Terminar Comodato
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="/Comodatos/Terminar" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idCom" value="{{ $comodatos -> idComod }}">
+                                        <input type="hidden" name="idHard" value="{{ $comodatos -> hardwares_idHard }}">
+                                        <button type="submit" class="btn btn-danger btn-xs"><i
+                                                    class="fa fa-close"></i> Terminar Comodato
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

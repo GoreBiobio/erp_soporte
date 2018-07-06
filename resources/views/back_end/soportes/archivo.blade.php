@@ -29,7 +29,27 @@
                     </tr>
                     </thead>
                     <tbody>
-
+                    @foreach($sop_arc as $sop_arc)
+                        <tr>
+                            <td>
+                                <center>
+                                    <form action="/Soporte/Ficha" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $sop_arc -> idSolSop }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-eye"></i> SOP ID - {{ $sop_arc -> idSolSop }}</button>
+                                    </form>
+                                </center>
+                            </td>
+                            <td>{{ $sop_arc -> fecCreaSop }}</td>
+                            <td>{{ $sop_arc->paternoFunc }} {{ $sop_arc->maternoFunc }}
+                                , {{ $sop_arc->nombresFunc }}</td>
+                            <td>{{ $sop_arc -> tipoSopB }}</td>
+                            <td>{{ $sop_arc -> solicitudSop }}</td>
+                            <td>{{ $sop_arc -> tipoSopD }}</td>
+                            <td>{{ $sop_arc -> estadoSop }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

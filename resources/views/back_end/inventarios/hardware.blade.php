@@ -136,19 +136,19 @@
                 <h3 class="box-title">Gestión Avanzada Inventario</h3>
             </div>
             <div class="box-body">
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-apple"></i> Marcas
                 </a>
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-slack"></i> Modelos
                 </a>
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-archive"></i> Ubicaciones
                 </a>
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-archive"></i> Secciones
                 </a>
-                <a class="btn btn-app">
+                <a class="btn btn-app" href="/Proximamente">
                     <i class="fa fa-archive"></i> Cajas
                 </a>
             </div>
