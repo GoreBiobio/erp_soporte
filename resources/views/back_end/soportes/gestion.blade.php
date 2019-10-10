@@ -13,7 +13,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">SOPORTES SIN EJECUTAR</h3>
+                <h3 class="box-title"><i class="fa fa-support"></i> SOPORTES SIN EJECUTAR</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -23,7 +23,6 @@
                         <th>ID Soporte</th>
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Equipo</th>
-                        <th>Motivo Solicitud</th>
                         <th>Detalle de la Solicitud</th>
                         <th>Nivel Crítico</th>
                         <th>Estado Actual</th>
@@ -39,7 +38,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
                                         <button type="submit" class="btn btn-success btn-xs"><i
-                                                    class="fa fa-eye"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
+                                                    class="fa fa-check-circle"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
                                     </form>
                                 </center>
                             </td>
@@ -52,16 +51,13 @@
                                     Equipo: {{ $listadoSop -> hardSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> tipoSopB }}</center>
-                            </td>
-                            <td>
                                 <center>{{ $listadoSop -> solicitudSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> tipoSopD }}</center>
+                                <center>{{ $listadoSop -> nombreTipo }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> estadoSop }}</center>
+                                <center>{{ $listadoSop -> nombreEstado }}</center>
                             </td>
                             <td>
                                 <center>
@@ -85,7 +81,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">MIS SOPORTES PENDIENTES</h3>
+                <h3 class="box-title"><i class="fa fa-dashboard"></i> MIS SOPORTES PENDIENTES</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -129,10 +125,10 @@
                                 <center>{{ $sop_pend -> solicitudSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $sop_pend -> tipoSopD }}</center>
+                                <center>{{ $sop_pend -> nombreTipo }}</center>
                             </td>
                             <td>
-                                <center>{{ $sop_pend -> estadoSop }}</center>
+                                <center>{{ $sop_pend -> nombreEstado }}</center>
                             </td>
                         </tr>
                     @endforeach

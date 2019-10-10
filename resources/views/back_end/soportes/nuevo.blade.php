@@ -71,16 +71,12 @@
                                 @endforeach
                             </select></div>
                     </div>
-
-                    <form role="form" class="form-horizontal">
-                        <!-- text input -->
+                     <!-- text input -->
                         <div class="form-group">
                             <div class="col-md-3">
                                 <label for="rut">Estado Actual</label>
                                 <select class="form-control" name="ESB" readonly="">
-                                    @foreach($estado_sop as $estado_sop)
-                                        <option value="{{ $estado_sop->nombreEstado }}">{{ $estado_sop -> nombreEstado }}</option>
-                                    @endforeach
+                                        <option value="19">Creación Interna</option>
                                 </select>
                             </div>
 
@@ -99,7 +95,8 @@
 
                             <div class="col-md-6">
                                 <label for="telefono">Observaciones Solicitud:</label>
-                                <textarea class="form-control" name="ObsSol" rows="3" placeholder="Observaciones internas unidad de informática acerca de la solicitud"></textarea>
+                                <textarea class="form-control" name="ObsSol" rows="3" placeholder="Observaciones internas unidad de informática acerca de la solicitud">
+                                </textarea>
                             </div>
                         </div>
                         <div class="box-footer">
@@ -107,6 +104,7 @@
                             <button id="btn" class="btn btn-success pull-right">Ingresar Nueva Solicitud</button>
                         </div>
                     </form>
+
             </div>
             <!-- /.box-body -->
         </div>
@@ -115,7 +113,7 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Listado de Mis Soportes</h3>
+                <h3 class="box-title">Listado de Mis Soportes Abiertos</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -125,8 +123,7 @@
                         <th>ID Soporte</th>
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Equipo</th>
-                        <th>Motivo Solicitud</th>
-                        <th>Obs de la Solicitud</th>
+                        <th>Detalle de Solicitud</th>
                         <th>Nivel Crítico</th>
                         <th>Estado Actual</th>
                     </tr>
@@ -140,7 +137,7 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
                                         <button type="submit" class="btn btn-success btn-xs"><i
-                                                    class="fa fa-eye"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
+                                                    class="fa fa-check-circle"></i> SOP ID - {{ $listadoSop -> idSolSop }}</button>
                                     </form>
                                 </center>
                             </td>
@@ -151,13 +148,10 @@
                                 <center>{{ $listadoSop -> paternoFunc }}, {{ $listadoSop -> nombresFunc }} / Anexo: {{ $listadoSop -> anexoFunc }} - Equipo: {{ $listadoSop -> hardSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> tipoSopB }}</center>
+                                <center>{{ substr($listadoSop -> solicitudSop,0,75) }} ...</center>
                             </td>
                             <td>
-                                <center>{{ $listadoSop -> obsSoftSop }}</center>
-                            </td>
-                            <td>
-                                <center>{{ $listadoSop -> tipoSopD }}</center>
+                                <center>{{ $listadoSop -> nombreTipo }}</center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> estadoSop }}</center>

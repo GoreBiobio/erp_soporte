@@ -57,9 +57,12 @@ Route::get('/Soporte/Archivo', 'Soportes@archivo_soporte');
 Route::get('/Soporte/Gestion', 'Soportes@gestion_soporte');
 
 Route::post('/Soporte/Ficha', 'Soportes@ficha_soporte');
-Route::post('/Soporte/Observaciones', 'Soportes@observaciones');
-Route::post('/Soporte/Cierre', 'Soportes@cerrar');
 Route::post('/Soporte/Tomar', 'Soportes@tomar');
+Route::post('/Soporte/MotivoSolicitud', 'Soportes@motivo');
+Route::post('/Soporte/SoporteEntregado', 'Soportes@forma');
+Route::post('/Soporte/Observaciones', 'Soportes@observaciones');
+Route::post('/Soporte/ObservacionesCierre', 'Soportes@observacionescierre');
+Route::post('/Soporte/Cierre', 'Soportes@cerrar');
 
 // Rutas Módulo Mensajes
 Route::get('/Mensajeria', 'Mensajes@ver');

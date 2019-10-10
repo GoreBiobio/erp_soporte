@@ -48,15 +48,8 @@ class Soportes extends Controller
             ])
             ->get();
 
-        $estado_soporte = DB::table('estados')
-            ->where([
-                ['nivelEstado', 'Soporte'],
-                ['subnivelEstado', 'Interno'],
-                ['estadoEstado', 'Activa']
-            ])
-            ->get();
-
         $mis_soportes = DB::table('solicitudsoportes')
+            ->join('tipos', 'tipos.idTipo', '=', 'solicitudsoportes.tipoSopD')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where('funcRespoSop', '=', Auth::user()->idFuncUser)
             ->get();
@@ -67,7 +60,6 @@ class Soportes extends Controller
             'tipo_sop_b' => $tipo_soporte_b,
             'tipo_sop_c' => $tipo_soporte_c,
             'tipo_sop_d' => $tipo_soporte_d,
-            'estado_sop' => $estado_soporte,
             'm_sop' => $mis_soportes
         ]);
 
@@ -111,14 +103,18 @@ class Soportes extends Controller
     {
 
         $soportes = DB::table('solicitudsoportes')
+            ->join('tipos', 'tipos.idTipo', '=', 'solicitudsoportes.tipoSopD')
+            ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where('funcRespoSop', '=', null)
             ->get();
 
         $sop_pend = DB::table('solicitudsoportes')
+            ->join('tipos', 'tipos.idTipo', '=', 'solicitudsoportes.tipoSopD')
+            ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
             ->where([
-                ['funcRespoSop','=', Auth::user()->idFuncUser],
+                ['funcRespoSop', '=', Auth::user()->idFuncUser],
                 ['estadoSop', '<>', 'Cerrado']
             ])
             ->get();
@@ -152,41 +148,39 @@ class Soportes extends Controller
 
         $id_soporte = $request->input('idSoporte');
 
+        $forma_soporte = DB::table('tipos')
+            ->where([
+                ['nivelTipo', '=', 'Soporte'],
+                ['subnivelTipo', '=', 'Tipo'],
+                ['estadoTipo', '=', 'Activa'],
+            ])
+            ->get();
+
+        $tipo_soporte = DB::table('tipos')
+            ->where([
+                ['nivelTipo', '=', 'Soporte'],
+                ['subnivelTipo', '=', 'Forma'],
+                ['estadoTipo', '=', 'Activa'],
+            ])
+            ->get();
+
         $soporte = DB::table('solicitudsoportes')
             ->join('funcionarios', 'funcionarios.idFunc', 'solicitudsoportes.funcSolicSop')
+            ->join('tipos', 'tipos.idTipo', '=', 'solicitudsoportes.tipoSopD')
+            ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
+            ->join('hardwares', 'idHard', '=', 'solicitudsoportes.hardSop')
+            ->join('modelos', 'idModelo', '=', 'hardwares.modelos_idModelo')
+            ->join('marcas', 'idMarca', '=', 'modelos.marcas_idMarca')
             // ->join('users', 'users.idFuncUser', 'solicitudsoportes.funcRespoSop')
             ->where('idSolSop', '=', $id_soporte)
             ->first();
 
         return view('back_end.soportes.ficha_soporte', [
-            'soporte' => $soporte
+            'soporte' => $soporte,
+            'forma' => $forma_soporte,
+            'tipo_soporte' => $tipo_soporte
         ]);
 
-    }
-
-    public function observaciones(Request $request)
-    {
-
-        DB::table('solicitudsoportes')
-            ->where('idSolSop', $request->input('idSop'))
-            ->update([
-                'obsSoftSop' => $request->input('ObsSop')
-            ]);
-
-        return redirect('/Soporte/Gestion');
-
-    }
-
-    public function cerrar(Request $request)
-    {
-
-        DB::table('solicitudsoportes')
-            ->where('idSolSop', $request->input('idSop'))
-            ->update([
-                'estadoSop' => 'Cerrado'
-            ]);
-
-        return redirect('/Soporte/Gestion');
     }
 
     public function tomar(Request $request)
@@ -195,10 +189,75 @@ class Soportes extends Controller
         DB::table('solicitudsoportes')
             ->where('idSolSop', $request->input('idSoporte'))
             ->update([
-                'funcRespoSop' => Auth::user()->idFuncUser
+                'funcRespoSop' => Auth::user()->idFuncUser,
+                'estadoSop' => 16
+
             ]);
 
         return redirect('/Soporte/Gestion');
     }
 
+    public function motivo(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSoporte'))
+            ->update([
+                'tipoSopB' => $request->input('motivo')
+            ]);
+
+        return redirect('/Soporte/Gestion');
+    }
+
+    public function forma(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSoporte'))
+            ->update([
+                'tipoSopC' => $request->input('forma')
+            ]);
+
+        return redirect('/Soporte/Gestion');
+    }
+
+    public function observaciones(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSoporte'))
+            ->update([
+                'obsSoftSop' => $request->input('ObsSop')
+            ]);
+
+        return redirect('/Soporte/Gestion');
+
+    }
+
+    public function observacionescierre(Request $request)
+    {
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSoporte'))
+            ->update([
+                'obsCierreSop' => $request->input('ObsSopCierre')
+            ]);
+
+        return redirect('/Soporte/Gestion');
+
+    }
+
+    public function cerrar(Request $request)
+    {
+        $fecha = new DateTime;
+
+        DB::table('solicitudsoportes')
+            ->where('idSolSop', $request->input('idSop'))
+            ->update([
+                'fecCierreSop' => $fecha,
+                'estadoSop' => 17
+            ]);
+
+        return redirect('/Soporte/Gestion');
+    }
 }
