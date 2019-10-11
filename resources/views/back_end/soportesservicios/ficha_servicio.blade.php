@@ -3,7 +3,7 @@
     Ficha Electrónica de Soporte
 @endsection
 @section('contentheader_title')
-    Soporte
+    Soporte de Servicios
 @endsection
 @section('contentheader_description')
     / Ficha Electrónica de Soporte
@@ -17,11 +17,11 @@
             <div class="col-xs-12">
                 <h4 class="page-header">
                     <small><i class="fa fa-user"></i> <strong>ID SOPORTE:</strong>
-                        <strong>NÚMERO / {{ $soporte -> idSolSop }}</strong>
+                        <strong>NÚMERO / {{ $soporte -> idSolServ }}</strong>
                     </small>
                 </h4>
                 <h4>
-                    <small class="pull-right">Fecha de Solicitud: {{ $soporte -> fecCreaSop }}</small>
+                    <small class="pull-right">Fecha de Solicitud: {{ $soporte -> fecCreaSolServ }}</small>
                 </h4>
             </div>
         </div>
@@ -47,12 +47,12 @@
             <div class="col-sm-4 invoice-col">
                 <address>
                     <strong>SOPORTE</strong><br><br>
-                    <strong>Forma Solicitud: </strong> {{ $soporte -> tipoSopA }}<br>
-                    <strong>Motivo Solicitud: </strong> {{ $soporte -> tipoSopB }}<br>
-                    <strong>Forma de Soporte: </strong> {{ $soporte -> tipoSopC }}<br>
-                    <strong>Nivel Crítico: </strong> @if($soporte -> estadoCritSop == '1')
+                    <strong>Forma Solicitud: </strong> {{ $soporte -> tipoSolServA }}<br>
+                    <strong>Motivo Solicitud: </strong> {{ $soporte -> tipoSolServB }}<br>
+                    <strong>Forma de Soporte: </strong> {{ $soporte -> tipoSolServC }}<br>
+                    <strong>Nivel Urgencia: </strong> @if($soporte -> estadoCritSolServ == '1')
                         BAJA
-                    @elseif($soporte -> estadoCritSop == '2')
+                    @elseif($soporte -> estadoCritSolServ == '2')
                         MEDIA
                     @else
                         ALTA
@@ -61,12 +61,8 @@
             </div>
             <!-- /.col -->
             <div class="col-sm-4 invoice-col">
-                <b>EQUIPO / SOFTWARE</b><br><br>
-                <strong>Equipo: </strong>{{ $soporte -> tipoHard }}
-                <strong>S/N:</strong> {{ $soporte -> numSerieHard }}<br>
-                <strong>Marca: </strong>{{ $soporte -> marca }} - {{ $soporte -> modelo }}<br>
-                <strong>Estado: </strong>{{ $soporte -> estadoHardNA }}<br>
-                <strong>IP: </strong>{{ $soporte -> ipHard }}
+                <b>SERVICIO</b><br><br>
+                <strong>Servicio: </strong>{{ $soporte -> servicio }}
             </div>
             <!-- /.col -->
         </div>
@@ -79,7 +75,7 @@
                 </p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    {{ $soporte -> solicitudSop }}
+                    {{ $soporte -> solicitudServ }}
                 </p>
             </div>
 
@@ -89,7 +85,7 @@
                 </p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    {{ $soporte -> obsSoftSop }}
+                    {{ $soporte -> obsSolServ }}
                 </p>
             </div>
             <!-- /.col -->
@@ -103,7 +99,7 @@
                 </p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    {{ $soporte -> obsCierreSop }}
+                    {{ $soporte -> obsCierreSolServ }}
                 </p>
             </div>
 
@@ -135,7 +131,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <center>@if($soporte -> tipoSopB == 'Pendiente')
+                                    <center>@if($soporte -> tipoSolServB == 'Pendiente')
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
@@ -151,7 +147,7 @@
                                     </center>
                                 </td>
                                 <td>
-                                    <center>@if($soporte -> tipoSopC == 'Pendiente')
+                                    <center>@if($soporte -> tipoSolServC == 'Pendiente')
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
@@ -167,7 +163,7 @@
                                     </center>
                                 </td>
                                 <td>
-                                    <center>@if($soporte -> obsCierreSop == null)
+                                    <center>@if($soporte -> obsCierreSolServ == null)
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
@@ -183,7 +179,7 @@
                                     </center>
                                 </td>
                                 <td>
-                                    <center>@if($soporte -> fecCierreSop == null)
+                                    <center>@if($soporte -> fecCierreSolServ == null)
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
@@ -199,7 +195,7 @@
                                     </center>
                                 </td>
                                 <td>
-                                    <center>@if($soporte -> funcAprobSop == null)
+                                    <center>@if($soporte -> funcAprobSolServ == null)
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
@@ -221,43 +217,43 @@
                     <!-- /.box-body -->
                 </div>
 
-                @if($soporte -> funcRespoSop == null)
+                @if($soporte -> funcRespoSolServ == null)
                     <center>
-                        <form action="/Soporte/Tomar" method="POST">
+                        <form action="/Soporte/TomarServicio" method="POST">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <input type="hidden" name="idSoporte" value="{{ $soporte -> idSolSop }}">
+                            <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
                             <button type="submit" class="btn btn-danger btn-xs"><i
                                         class="fa fa-close"></i> BOTONES NO DISPONIBLES HASTA TOMAR SOPORTE
                             </button>
                         </form>
                     </center>
 
-                @elseif($soporte -> funcRespoSop == Auth::user()->idFuncUser)
+                @elseif($soporte -> funcRespoSolServ == Auth::user()->idFuncUser)
 
-                    @if($soporte -> tipoSopB == 'Pendiente')
+                    @if($soporte -> tipoSolServB == 'Pendiente')
                         <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#ModalMotivo">
                             <i
                                     class="fa fa-pencil"></i> MOTIVO SOPORTE
                         </button>
                     @else
-                        <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#ModalMotivo"
+                        <button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="#ModalMotivo"
                                 disabled><i
                                     class="fa fa-pencil"></i> MOTIVO SOPORTE
                         </button>
                     @endif
-                    @if($soporte -> tipoSopC == 'Pendiente')
+                    @if($soporte -> tipoSolServC == 'Pendiente')
                         <button type="button" class="btn-xs btn-primary" data-toggle="modal"
                                 data-target="#ModalSoporte"><i
                                     class="fa fa-pencil"></i> FORMA SOPORTE
                         </button>
                     @else
-                        <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#ModalSoporte"
+                        <button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="#ModalSoporte"
                                 disabled><i
                                     class="fa fa-pencil"></i> FORMA SOPORTE
                         </button>
                     @endif
 
-                    @if($soporte -> fecCierreSop == null)
+                    @if($soporte -> fecCierreSolServ == null)
                         <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#ModalObs"><i
                                     class="fa fa-pencil"></i> OBS AL SOPORTE
                         </button>
@@ -267,7 +263,7 @@
                         </button>
                     @endif
 
-                    @if($soporte -> obsCierreSop == null)
+                    @if($soporte -> obsCierreSolServ == null)
                         <button type="button" class="btn-xs btn-primary" data-toggle="modal"
                                 data-target="#ModalObsCierre"><i
                                     class="fa fa-pencil"></i> OBS DE CIERRE
@@ -278,24 +274,24 @@
                         </button>
                     @endif
 
-                    @if($soporte -> tipoSopB == 'Pendiente' or $soporte -> tipoSopC == 'Pendiente' or $soporte -> obsCierreSop == null )
+                    @if($soporte -> tipoSolServB == 'Pendiente' or $soporte -> tipoSolServC == 'Pendiente' or $soporte -> obsCierreSolServ == null )
                         <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="" DISABLED>
                             <i
                                     class="fa fa-close"></i> CIERRE DE TICKET NO DISPONIBLE
                         </button>
                     @else
-                        @if($soporte -> fecCierreSop == null)
+                        @if($soporte -> fecCierreSolServ == null)
                             <button type="button" class="btn-xs btn-success" data-toggle="modal"
                                     data-target="#ModalCierre">
                                 <i
                                         class="fa fa-close"></i> CERRAR TICKET SOPORTE
                             </button>
                         @else
-                                <button type="button" class="btn-xs btn-success" data-toggle="modal"
-                                        data-target="#" DISABLED>
-                                    <i
-                                            class="fa fa-close"></i> TICKET CERRADO
-                                </button>
+                            <button type="button" class="btn-xs btn-success" data-toggle="modal"
+                                    data-target="#" DISABLED>
+                                <i
+                                        class="fa fa-close"></i> TICKET CERRADO
+                            </button>
                         @endif
 
                     @endif
@@ -330,7 +326,7 @@
                         <td>
                             <center>1</center>
                         </td>
-                        <td>{{ $soporte -> fecCreaSop }}</td>
+                        <td>{{ $soporte -> fecCreaSolServ }}</td>
                         <td>Creación del Ticket de Soporte</td>
                     </tr>
                     <tr>
@@ -402,10 +398,10 @@
                     <h4 class="modal-title">Motivo de Solicitud</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/Soporte/MotivoSolicitud" method="POST" class="form-horizontal">
+                    <form role="form" action="/Soporte/MotivoSolicitudServicio" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSoporte" value="{{ $soporte -> idSolSop }}">
+                        <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -442,10 +438,10 @@
                     <h4 class="modal-title">Forma de Entrega de Soporte </h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/Soporte/SoporteEntregado" method="POST" class="form-horizontal">
+                    <form role="form" action="/Soporte/SoporteEntregadoServicio" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSoporte" value="{{ $soporte -> idSolSop }}">
+                        <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -482,15 +478,15 @@
                     <h4 class="modal-title">Observaciones al Soporte</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/Soporte/Observaciones" method="POST" class="form-horizontal">
+                    <form role="form" action="/Soporte/ObservacionesServicio" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSoporte" value="{{ $soporte -> idSolSop }}">
+                        <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
 
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label for="correo">Observaciones:</label>
-                                <textarea class="form-control" rows="3" name="ObsSop"
+                                <textarea class="form-control" rows="3" name="ObsSopServ"
                                           placeholder="Observaciones Técnicas del Soporte ..." required></textarea>
                             </div>
                         </div>
@@ -519,10 +515,10 @@
                     <h4 class="modal-title">Observaciones de Cierre al Soporte</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/Soporte/ObservacionesCierre" method="POST" class="form-horizontal">
+                    <form role="form" action="/Soporte/ObsCierreServicio" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSoporte" value="{{ $soporte -> idSolSop }}">
+                        <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
 
                         <div class="form-group">
                             <div class="col-md-12">
@@ -546,6 +542,7 @@
 
         </div>
     </div>
+
     <div id="ModalCierre" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -556,10 +553,10 @@
                     <h4 class="modal-title">Cierre del Soporte</h4>
                 </div>
                 <div class="modal-body">
-                    <form role="form" action="/Soporte/Cierre" method="POST" class="form-horizontal">
+                    <form role="form" action="/Soporte/CierreServicio" method="POST" class="form-horizontal">
                         <!-- text input -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <input type="hidden" name="idSop" value="{{ $soporte -> idSolSop }}">
+                        <input type="hidden" name="idSolServ" value="{{ $soporte -> idSolServ }}">
                         <div class="box-footer">
                             <center>
                                 <button type="submit" class="btn btn-danger">Cerrar Ticket de Soporte</button>

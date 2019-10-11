@@ -24,7 +24,7 @@
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Servicio</th>
                         <th>Detalle de la Solicitud</th>
-                        <th>Nivel Crítico</th>
+                        <th>Nivel Urgencia</th>
                         <th>Estado Actual</th>
                         <th>Acciones</th>
                     </tr>
@@ -34,9 +34,9 @@
                         <tr>
                             <td>
                                 <center>
-                                    <form action="/XXX/Ficha" method="POST">
+                                    <form action="/Soporte/FichaServicio" method="POST">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolServ }}">
+                                        <input type="hidden" name="idSolServ" value="{{ $listadoSop -> idSolServ }}">
                                         <button type="submit" class="btn btn-success btn-xs"><i
                                                     class="fa fa-check-circle"></i> SOP ID
                                             - {{ $listadoSop -> idSolServ }}</button>
@@ -102,7 +102,7 @@
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Servicio</th>
                         <th>Motivo Solicitud</th>
-                        <th>Nivel Crítico</th>
+                        <th>Nivel Urgencia</th>
                         <th>Estado Actual</th>
                     </tr>
                     </thead>
@@ -111,9 +111,9 @@
                         <tr>
                             <td>
                                 <center>
-                                    <form action="/XXX/Ficha" method="POST">
+                                    <form action="/Soporte/FichaServicio" method="POST">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolServ }}">
+                                        <input type="hidden" name="idSolServ" value="{{ $listadoSop -> idSolServ }}">
                                         <button type="submit" class="btn btn-success btn-xs"><i
                                                     class="fa fa-check-circle"></i> SOP ID
                                             - {{ $listadoSop -> idSolServ }}</button>

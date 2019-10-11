@@ -93,7 +93,7 @@
                         <th>Usuario - Equipo</th>
                         <th>Motivo Solicitud</th>
                         <th>Detalle de la Solicitud</th>
-                        <th>Nivel Crítico</th>
+                        <th>Nivel Urgencia</th>
                         <th>Estado Actual</th>
                     </tr>
                     </thead>
@@ -125,7 +125,13 @@
                                 <center>{{ $sop_pend -> solicitudSop }}</center>
                             </td>
                             <td>
-                                <center>{{ $sop_pend -> nombreTipo }}</center>
+                                <center>@if($sop_pend -> estadoCritSop == '1')
+                                        BAJA
+                                    @elseif($sop_pend -> estadoCritSop == '2')
+                                        MEDIA
+                                    @else
+                                        ALTA
+                                    @endif</center>
                             </td>
                             <td>
                                 <center>{{ $sop_pend -> nombreEstado }}</center>

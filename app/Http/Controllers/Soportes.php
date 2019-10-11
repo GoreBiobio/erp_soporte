@@ -106,7 +106,10 @@ class Soportes extends Controller
             ->join('tipos', 'tipos.idTipo', '=', 'solicitudsoportes.tipoSopD')
             ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitudsoportes.funcSolicSop')
-            ->where('funcRespoSop', '=', null)
+            ->where([
+                ['funcRespoSop', '=', null],
+                ['estadoSop', '=', '15']
+            ])
             ->get();
 
         $sop_pend = DB::table('solicitudsoportes')

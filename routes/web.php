@@ -71,13 +71,13 @@ Route::post('/Soporte/Cierre', 'Soportes@cerrar');
 
 Route::get('/Soporte/GestionServicios', 'SoportesServicios@gestion_soporte');
 
-//Route::post('/Soporte/Ficha', 'Soportes@ficha_soporte');
+Route::post('/Soporte/FichaServicio', 'SoportesServicios@ficha_soporte');
 Route::post('/Soporte/TomarServicio', 'SoportesServicios@tomar');
-//Route::post('/Soporte/MotivoSolicitud', 'Soportes@motivo');
-//Route::post('/Soporte/SoporteEntregado', 'Soportes@forma');
-//Route::post('/Soporte/Observaciones', 'Soportes@observaciones');
-//Route::post('/Soporte/ObservacionesCierre', 'Soportes@observacionescierre');
-//Route::post('/Soporte/Cierre', 'Soportes@cerrar');
+Route::post('/Soporte/MotivoSolicitudServicio', 'SoportesServicios@motivo');
+Route::post('/Soporte/SoporteEntregadoServicio', 'SoportesServicios@forma');
+Route::post('/Soporte/ObservacionesServicio', 'SoportesServicios@observaciones');
+Route::post('/Soporte/ObsCierreServicio', 'SoportesServicios@observacionescierre');
+Route::post('/Soporte/CierreServicio', 'SoportesServicios@cerrar');
 
 
 
