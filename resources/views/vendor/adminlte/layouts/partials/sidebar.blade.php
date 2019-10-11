@@ -74,7 +74,8 @@
                 <a href="#"><i class='fa fa-user'></i> <span>Soporte</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="/Soporte/Nuevo">Nuevo Soporte</a></li>
-                    <li><a href="/Soporte/Gestion">Gestionar Soportes</a></li>
+                    <li><a href="/Soporte/Gestion">Gestionar Soportes Hardware</a></li>
+                    <li><a href="/Soporte/GestionServicios">Gestionar Soportes Servicios</a></li>
                     <li><a href="/Soporte/Archivo">Archivo Soportes</a></li>
                 </ul>
             </li>

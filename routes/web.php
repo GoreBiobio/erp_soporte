@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('vendor.adminlte.auth.login');
 });
 
 // Rutas de Módulos Que No Requieren Autentificación
@@ -49,7 +49,7 @@ route::post('/Comodatos/GenerarWordDevolucion','GenerarWord@generar_word_devoluc
 Route::get('/Mantencion/Nuevo', 'Mantenciones@nueva_mantencion');
 Route::get('/Mantencion/Gestion', 'Mantenciones@gestion_mantencion');
 
-//Rutas Módulo Soporte
+//Rutas Módulo Soporte Hardware
 Route::get('/Soporte/Nuevo', 'Soportes@nuevo_soporte');
 Route::post('/Soporte/Guardar', 'Soportes@guardar_soporte');
 Route::get('/Soporte/Archivo', 'Soportes@archivo_soporte');
@@ -63,6 +63,27 @@ Route::post('/Soporte/SoporteEntregado', 'Soportes@forma');
 Route::post('/Soporte/Observaciones', 'Soportes@observaciones');
 Route::post('/Soporte/ObservacionesCierre', 'Soportes@observacionescierre');
 Route::post('/Soporte/Cierre', 'Soportes@cerrar');
+
+//Rutas Módulo Soporte Servicios
+//Route::get('/Soporte/Nuevo', 'Soportes@nuevo_soporte');
+//Route::post('/Soporte/Guardar', 'Soportes@guardar_soporte');
+//Route::get('/Soporte/Archivo', 'Soportes@archivo_soporte');
+
+Route::get('/Soporte/GestionServicios', 'SoportesServicios@gestion_soporte');
+
+//Route::post('/Soporte/Ficha', 'Soportes@ficha_soporte');
+Route::post('/Soporte/TomarServicio', 'SoportesServicios@tomar');
+//Route::post('/Soporte/MotivoSolicitud', 'Soportes@motivo');
+//Route::post('/Soporte/SoporteEntregado', 'Soportes@forma');
+//Route::post('/Soporte/Observaciones', 'Soportes@observaciones');
+//Route::post('/Soporte/ObservacionesCierre', 'Soportes@observacionescierre');
+//Route::post('/Soporte/Cierre', 'Soportes@cerrar');
+
+
+
+
+
+
 
 // Rutas Módulo Mensajes
 Route::get('/Mensajeria', 'Mensajes@ver');
