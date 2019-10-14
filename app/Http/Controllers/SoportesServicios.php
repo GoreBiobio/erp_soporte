@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AsignacionProfesionalServicio;
+use App\Mail\CierreProfesionalServicio;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DateTime;
 use DB;
+use Illuminate\Support\Facades\Mail;
 
 class SoportesServicios extends Controller
 {
@@ -49,6 +52,29 @@ class SoportesServicios extends Controller
                 'funcRespoSolServ' => Auth::user()->idFuncUser,
                 'estadoSolServ' => 16
             ]);
+
+        $id_soporte = $request->input('idSolServ');
+
+        $soporte = DB::table('solicitud_servicio')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
+            ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
+            ->join('users', 'users.idFuncUser', 'solicitud_servicio.funcRespoSolServ')
+            ->where('idSolServ', '=', $id_soporte)
+            ->first();
+
+        $mailData = array(
+            'fecCreaSolServ' => $soporte->fecCreaSolServ,
+            'name' => $soporte->name,
+            'email' => $soporte->email,
+            'solicitudServ' => $soporte->solicitudServ,
+            'servicio' => $soporte->servicio,
+            'nombreEstado' => $soporte->nombreEstado
+        );
+
+        Mail::to('informatica@gorebiobio.cl')
+            ->cc($soporte->correoFunc)
+            ->send(new AsignacionProfesionalServicio($mailData));
 
         return redirect('/Soporte/GestionServicios');
     }
@@ -149,6 +175,29 @@ class SoportesServicios extends Controller
                 'fecCierreSolServ' => $fecha,
                 'estadoSolServ' => 17
             ]);
+
+        $id_soporte = $request->input('idSolServ');
+
+        $soporte = DB::table('solicitud_servicio')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
+            ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
+            ->join('users', 'users.idFuncUser', 'solicitud_servicio.funcRespoSolServ')
+            ->where('idSolServ', '=', $id_soporte)
+            ->first();
+
+        $mailData = array(
+            'fecCreaSolServ' => $soporte->fecCreaSolServ,
+            'name' => $soporte->name,
+            'email' => $soporte->email,
+            'solicitudServ' => $soporte->solicitudServ,
+            'servicio' => $soporte->servicio,
+            'nombreEstado' => $soporte->nombreEstado
+        );
+
+        Mail::to('informatica@gorebiobio.cl')
+            ->cc($soporte->correoFunc)
+            ->send(new CierreProfesionalServicio($mailData));
 
         return redirect('/Soporte/GestionServicios');
     }

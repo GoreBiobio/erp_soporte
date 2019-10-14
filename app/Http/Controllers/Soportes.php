@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AsignacionProfesional;
+use App\Mail\CierreProfesional;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DateTime;
 use DB;
+use Illuminate\Support\Facades\Mail;
 
 class Soportes extends Controller
 {
@@ -194,8 +197,28 @@ class Soportes extends Controller
             ->update([
                 'funcRespoSop' => Auth::user()->idFuncUser,
                 'estadoSop' => 16
-
             ]);
+
+        $id_soporte = $request->input('idSoporte');
+
+        $soporte = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', 'solicitudsoportes.funcSolicSop')
+            ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
+            ->join('users', 'users.idFuncUser', 'solicitudsoportes.funcRespoSop')
+            ->where('idSolSop', '=', $id_soporte)
+            ->first();
+
+        $mailData = array(
+            'fecCreaSop' => $soporte->fecCreaSop,
+            'name' => $soporte->name,
+            'email' => $soporte->email,
+            'solicitudSop' => $soporte->solicitudSop,
+            'nombreEstado' => $soporte->nombreEstado
+        );
+
+        Mail::to('informatica@gorebiobio.cl')
+            ->cc($soporte->correoFunc)
+            ->send(new AsignacionProfesional($mailData));
 
         return redirect('/Soporte/Gestion');
     }
@@ -260,6 +283,28 @@ class Soportes extends Controller
                 'fecCierreSop' => $fecha,
                 'estadoSop' => 17
             ]);
+
+        $id_soporte = $request->input('idSop');
+
+        $soporte = DB::table('solicitudsoportes')
+            ->join('funcionarios', 'funcionarios.idFunc', 'solicitudsoportes.funcSolicSop')
+            ->join('estados', 'estados.idEstado', '=', 'solicitudsoportes.estadoSop')
+            ->join('users', 'users.idFuncUser', 'solicitudsoportes.funcRespoSop')
+            ->where('idSolSop', '=', $id_soporte)
+            ->first();
+
+        $mailData = array(
+            'fecCreaSop' => $soporte->fecCreaSop,
+            'name' => $soporte->name,
+            'email' => $soporte->email,
+            'obsCierreSop' => $soporte->obsCierreSop,
+            'nombreEstado' => $soporte->nombreEstado,
+            'fecCierreSop' => $soporte->fecCierreSop
+        );
+
+        Mail::to('informatica@gorebiobio.cl')
+            ->cc($soporte->correoFunc)
+            ->send(new CierreProfesional($mailData));
 
         return redirect('/Soporte/Gestion');
     }
