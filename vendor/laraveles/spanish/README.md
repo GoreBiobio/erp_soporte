@@ -6,6 +6,10 @@
 
 Paquete de traducciones en español para Laravel 5. Este paquete te agrega a tu proyecto los ficheros de traducciones en español que Laravel 5 trae por defecto.
 
+## Versiones
+
+Para Laravel >=5.8 utilizar la versión 1.2+, incluye la validación de contraseña hasta 8 caracteres. Para el resto de versiones utilizar 1.1+.
+
 Archivos por defecto incluidos en Laravel:
 
 ```
@@ -29,7 +33,7 @@ Puedes instalar este paquete mediante composer:
 composer require laraveles/spanish
 ```
 
-Posteriormente debes agregar el proveedor de servicios en tu fichero `config/app.php`:
+En versiones anteriores a la 5.5 debes agregar el proveedor de servicios en tu fichero `config/app.php` (no es necesario en Laravel 5.5+ gracias al [sistema de autodiscovery](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518)):
 
 ```php
 'providers' => [
@@ -38,7 +42,7 @@ Posteriormente debes agregar el proveedor de servicios en tu fichero `config/app
 ];
 ```
 
-Ahora simplemente necesitamos necesitamos actualizar las traducciones que lo haremos con el siguiente comando:
+Ahora simplemente necesitamos actualizar las traducciones que lo haremos con el siguiente comando:
 
 ```bash
 php artisan vendor:publish --tag=lang
