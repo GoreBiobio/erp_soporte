@@ -1,4 +1,4 @@
-@extends('adminlte::layouts.app')
+@extends('adminlte::layouts.apptwo')
 @section('htmlheader_title')
     Inicio
 @endsection
@@ -11,124 +11,162 @@
 
 @section('main-content')
     <br>
-    <div class="row">
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>{{ $num_sop }}</h3>
+    <div class="callout callout-warning">
+        <h4><i class="icon fa fa-warning"></i> Incidencias Activas de Informática</h4>
+        <p class="text-primary" style="color:#fbffff;">
+            <marquee behavior="Slide" direction="left">
 
-                    <p>Soportes Pendientes</p>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3>{{ $num_mant }}<sup style="font-size: 20px"></sup></h3>
-
-                    <p>Mantenciones Pendientes</p>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-wrench"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>XX</h3>
-
-                    <p>Mensajes sin Leer</p>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-send"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
-            <div class="small-box bg-gray">
-                <div class="inner">
-                    <h3>XX</h3>
-
-                    <p>Historicos Cerrados</p>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-archive"></i>
-                </div>
-                <a href="#" class="small-box-footer">
-                    More info <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <!-- ./col -->
+            </marquee>
+        </p>
     </div>
-
     <hr>
 
-
-    <div class="col-md-6">
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <i class="fa fa-warning"></i>
-                <h3 class="box-title">ÚLTIMOS INCIDENTES</h3>
-            </div>
-
-            <div class="box box-widget">
-                <center>
-                    <button type="button" onclick="location.href='/Incidencia/Nuevo';" class="btn btn-danger btn-xs"><i class="fa fa-flag-o"></i> Nueva Incidencia
-                    </button>
-                </center>
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-support"></i> SOPORTES DE SERVICIOS SIN EJECUTAR</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-                @foreach($incidencias as $inc)
-
-                    @if($inc -> tipoInc == 'Baja Inesperada')
-                        <div class="alert alert-danger alert-dismissible">
-                            @elseif($inc -> tipoInc == 'Mant. Correctiva')
-                                <div class="alert alert-warning alert-dismissible">
-                                    @elseif($inc -> tipoInc == 'Baja Supervisada')
-                                        <div class="alert alert-info alert-dismissible">
-                                            @elseif($inc -> tipoInc == '')
-                                            @else
-                                            @endif
-                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                                ×
-                                            </button>
-                                            <h4><i class="icon fa fa-warning"></i> {{ $inc -> servAfectado }}!
-                                                - {{ $inc -> tipoInc }}
-                                            </h4>
-                                            {{ $inc -> detalleIncid }}
-
-                                            <br><br>
-                                            <small>Reportado por: {{ $inc -> name }}</small>
-                                        </div>
-
-                                        @endforeach
-                                </div>
-                                <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID Soporte</th>
+                        <th>Fecha/Hora Solicitud</th>
+                        <th>Usuario - Servicio</th>
+                        <th>Detalle de la Solicitud</th>
+                        <th>Nivel Urgencia</th>
+                        <th>Estado Actual</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($listadoSop as $listadoSop)
+                        <tr>
+                            <td>
+                                <center>
+                                    <form action="/Soporte/FichaServicio" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSolServ" value="{{ $listadoSop -> idSolServ }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-check-circle"></i> SOP ID
+                                            - {{ $listadoSop -> idSolServ }}</button>
+                                    </form>
+                                </center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> fecCreaSolServ }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> paternoFunc }}, {{ $listadoSop -> nombresFunc }} /
+                                    Anexo: {{ $listadoSop -> anexoFunc }} -
+                                    Servicio: {{ $listadoSop -> servicio }}
+                                </center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> solicitudServ }}</center>
+                            </td>
+                            <td>
+                                <center>@if($listadoSop -> estadoCritSolServ == '1')
+                                        BAJA
+                                    @elseif($listadoSop -> estadoCritSolServ == '2')
+                                        MEDIA
+                                    @else
+                                        ALTA
+                                    @endif
+                                </center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> nombreEstado }}</center>
+                            </td>
+                            <td>
+                                <center>
+                                    <form action="/Soporte/TomarServicio" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSolServ" value="{{ $listadoSop -> idSolServ }}">
+                                        <button type="submit" class="btn btn-primary btn-xs"><i
+                                                    class="fa fa-hand-o-right"></i> TOMAR
+                                        </button>
+                                    </form>
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
-
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <hr>
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-support"></i> SOPORTES DE HARDWARE SIN EJECUTAR</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>ID Soporte</th>
+                        <th>Fecha/Hora Solicitud</th>
+                        <th>Usuario - Equipo</th>
+                        <th>Detalle de la Solicitud</th>
+                        <th>Nivel Crítico</th>
+                        <th>Estado Actual</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($listadoSopHard as $listadoSop)
+                        <tr>
+                            <td>
+                                <center>
+                                    <form action="/Soporte/Ficha" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
+                                        <button type="submit" class="btn btn-success btn-xs"><i
+                                                    class="fa fa-check-circle"></i> SOP ID
+                                            - {{ $listadoSop -> idSolSop }}</button>
+                                    </form>
+                                </center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> fecCreaSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> paternoFunc }}, {{ $listadoSop -> nombresFunc }} /
+                                    Anexo: {{ $listadoSop -> anexoFunc }} -
+                                    Equipo: {{ $listadoSop -> hardSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> solicitudSop }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> nombreTipo }}</center>
+                            </td>
+                            <td>
+                                <center>{{ $listadoSop -> nombreEstado }}</center>
+                            </td>
+                            <td>
+                                <center>
+                                    <form action="/Soporte/Tomar" method="POST">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="hidden" name="idSoporte" value="{{ $listadoSop -> idSolSop }}">
+                                        <button type="submit" class="btn btn-primary btn-xs"><i
+                                                    class="fa fa-hand-o-right"></i> TOMAR
+                                        </button>
+                                    </form>
+                                </center>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
 
 @endsection

@@ -258,7 +258,7 @@
                                     class="fa fa-pencil"></i> OBS AL SOPORTE
                         </button>
                     @else
-                        <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#" disabled><i
+                        <button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="#" disabled><i
                                     class="fa fa-pencil"></i> OBS AL SOPORTE
                         </button>
                     @endif
@@ -269,7 +269,7 @@
                                     class="fa fa-pencil"></i> OBS DE CIERRE
                         </button>
                     @else
-                        <button type="button" class="btn-xs btn-primary" data-toggle="modal" data-target="#" disabled><i
+                        <button type="button" class="btn-xs btn-success" data-toggle="modal" data-target="#" disabled><i
                                     class="fa fa-pencil"></i> OBS DE CIERRE
                         </button>
                     @endif
@@ -311,7 +311,27 @@
             <br>
             <div class="col-xs-12 table-responsive">
                 <p class="lead">
-                    <small>Log del Soporte:</small>
+                    <small>Documentos Adjuntos:</small>
+                </p>
+                <div>
+                    @foreach($documentos as $documentos)
+                        <a href="http://soporte.gorebiobio.cl/adjuntos/solicitudes/{{$documentos->rutaDoc}}"
+                           target="_blank">
+                            <button class="btn btn-xs btn-warning"><i class="fa fa-download"></i>
+                                {{$documentos->nombreDoc}}
+                            </button>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+
+        <div class="row">
+            <br>
+            <div class="col-xs-12 table-responsive">
+                <p class="lead">
+                    <small>Logs del Soporte:</small>
                 </p>
                 <table class="table table-striped">
                     <thead>

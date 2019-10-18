@@ -5,5 +5,7 @@
         <small>Gobierno Regional del Biobio - <a href="mailto:soporte@gorebiobio.cl">soporte@gorebiobio.cl</a></small>
     </div>
     <!-- Default to the left -->
-    <small><strong>&copy; 2018 Departamento de Informática y Soporte.</strong><small> Versión: 0.1_UI</small></a>
-    </small></footer>
+    <small><strong>&copy; 2019 Departamento de Informática y Soporte.</strong>
+        <small> Versión: 0.1_UI</small>
+    </small>
+</footer>

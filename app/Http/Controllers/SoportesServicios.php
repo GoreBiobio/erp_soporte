@@ -107,10 +107,16 @@ class SoportesServicios extends Controller
             ->where('idSolServ', '=', $id_soporte)
             ->first();
 
+        $documentos = DB::table('documentos')
+            ->join('solicitud_servicio', 'solicitud_servicio.idSolServ', '=', 'documentos.subnivelDoc')
+            ->where('subnivelDoc', '=', $id_soporte)
+            ->get();
+
         return view('back_end.soportesservicios.ficha_servicio', [
             'soporte' => $soporte,
             'forma' => $forma_soporte,
-            'tipo_soporte' => $tipo_soporte
+            'tipo_soporte' => $tipo_soporte,
+            'documentos' => $documentos
         ]);
 
     }
@@ -190,7 +196,7 @@ class SoportesServicios extends Controller
             'fecCreaSolServ' => $soporte->fecCreaSolServ,
             'name' => $soporte->name,
             'email' => $soporte->email,
-            'solicitudServ' => $soporte->solicitudServ,
+            'obsCierreSolServ' => $soporte->obsCierreSolServ,
             'servicio' => $soporte->servicio,
             'nombreEstado' => $soporte->nombreEstado
         );

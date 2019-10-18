@@ -5,44 +5,27 @@
     <section class="sidebar">
 
         <!-- Sidebar user panel (optional) -->
-        @if (! Auth::guest())
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="{{ Gravatar::get($user->email) }}" class="img-circle" alt="User Image"/>
-                </div>
-                <div class="pull-left info">
-                    <p><small><small>{{ Auth::user()->name }}</small></small></p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Habilitado
-                    </a>
-                </div>
-            </div>
-    @endif
+        @if(! Auth::guest())
 
-    <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control"
-                       placeholder="{{ trans('adminlte_lang::message.search') }}..."/>
-                <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i
-                            class="fa fa-search"></i></button>
-              </span>
-            </div>
-        </form>
-        <!-- /.search form -->
-
-        <!-- Sidebar Menu -->
+        @endif
         <ul class="sidebar-menu">
+            <li class="header">PANEL GENERAL</li>
+            <li><a href="/"><i class='fa fa-dashboard'></i> <span>Panel General</span></a></li>
             <li class="header">ALERTAS</li>
-
             <li>
                 <a href="/Mensajeria">
-                    <i class="fa fa-envelope-o"></i> <span>Mensajería</span>
+                    <i class="fa fa-warning"></i> <span>Alertas</span>
                     <span class="pull-right-container">
                     <small class="label pull-right bg-yellow">12</small>
                     </span>
                 </a>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class='fa fa-info'></i> <span>Incidencias</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="/Incidencia/Nuevo">Gestión Incidencia</a></li>
+                </ul>
             </li>
             <li class="header">SISTEMA</li>
             <!-- Optionally, you can add icons to the links -->
@@ -55,7 +38,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-archive'></i> <span>Inventario</span> <i
+                <a href="#"><i class='fa fa-archive'></i> <span>Inventario Informática</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="/Inventarios/Hardware">Gestión Hardware</a></li>
@@ -63,7 +46,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-random'></i> <span>Comodatos</span> <i
+                <a href="#"><i class='fa fa-random'></i> <span>Comodatos Internos</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="/Comodatos/EnlazarHard">Enlazar Hardware / Persona</a></li>
@@ -71,21 +54,30 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-user'></i> <span>Soporte</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-server'></i> <span>Soporte Hardware</span> <i
+                            class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="/Soporte/Nuevo">Nuevo Soporte</a></li>
+                    @if(Auth::user()->level == 1)
+                        <li><a href="/Soporte/JefaturaSW">Gestión Jefatura</a></li>
+                    @endif
                     <li><a href="/Soporte/Gestion">Gestionar Soportes Hardware</a></li>
-                    <li><a href="/Soporte/GestionServicios">Gestionar Soportes Servicios</a></li>
-                    <li><a href="/Soporte/Archivo">Archivo Soportes</a></li>
+                    <li><a href="/Soporte/ArchivoHW">Archivos Soporte Hardware</a></li>
+
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-info'></i> <span>Incidencias</span> <i
+                <a href="#"><i class='fa fa-laptop'></i> <span>Soporte Software</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="/Incidencia/Nuevo">Gestión Incidencia</a></li>
+                    @if(Auth::user()->level == 1)
+                        <li><a href="/Soporte/JefaturaHW">Gestión Jefatura</a></li>
+                    @endif
+                    <li><a href="/Soporte/GestionServicios">Gestionar Soportes Servicios</a></li>
+                    <li><a href="/Soporte/ArchivoSW">Archivos Soporte Software</a></li>
+
                 </ul>
             </li>
+
             <li class="header">GENERAL</li>
             <li class="treeview">
                 <a href="#"><i class='fa fa-gears'></i> <span>Configuraciones</span> <i

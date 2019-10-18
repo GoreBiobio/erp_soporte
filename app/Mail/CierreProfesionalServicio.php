@@ -20,14 +20,12 @@ class CierreProfesionalServicio extends Mailable
     public function build()
     {
         $mailData = array(
-
             'fecCreaSolServ' => $this->mailData['fecCreaSolServ'],
             'name' =>$this->mailData['name'],
             'email' => $this->mailData['email'],
-            'solicitudServ' => $this->mailData['solicitudServ'],
+            'obsCierreSolServ' => $this->mailData['obsCierreSolServ'],
             'nombreEstado' => $this->mailData['nombreEstado'],
             'servicio' => $this->mailData['servicio']
-
         );
 
         return $this->view('mails.cerrarprofesionalserv')

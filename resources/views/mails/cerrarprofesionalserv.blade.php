@@ -96,8 +96,8 @@
                                                                         <br>{{ $data['servicio'] }}</small>
                                                                 </li>
                                                                 <li>
-                                                                    <small><b>Motivo del Soporte:</b>
-                                                                        <br>{{ $data['solicitudServ'] }}
+                                                                    <small><b>Observaciones de Cierre:</b>
+                                                                        <br>{{ $data['obsCierreSolServ'] }}
                                                                     </small>
                                                                 </li>
                                                             </ul>
