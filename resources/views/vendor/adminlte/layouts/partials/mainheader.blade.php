@@ -3,7 +3,7 @@
 
     <!-- Logo -->
     <a href="{{ url('/home') }}" class="logo">
-        <span class="logo-lg"><b>U. INFORMÁTICA</span>
+        <span class="logo-lg"><b>U. INFORMÁTICA</b></span>
     </a>
 
     <!-- Header Navbar -->
