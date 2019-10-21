@@ -195,7 +195,7 @@
                                     </center>
                                 </td>
                                 <td>
-                                    <center>@if($soporte -> funcAprobSolServ == null)
+                                    <center>@if($soporte -> fecAprobSolServ == null)
                                             <button type="button" class="btn-xs btn-danger" data-toggle="modal"
                                                     data-target="">
                                                 <i
