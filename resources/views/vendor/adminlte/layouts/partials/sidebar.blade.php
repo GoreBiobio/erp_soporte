@@ -54,19 +54,19 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-server'></i> <span>Soporte Hardware</span> <i
+                <a href="#"><i class='fa fa-server'></i> <span>Soporte Equipos</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->level == 1)
                         <li><a href="/Soporte/JefaturaHW">Gestión Jefatura</a></li>
                     @endif
-                    <li><a href="/Soporte/Gestion">Gestionar Soportes Hardware</a></li>
-                    <li><a href="/Soporte/ArchivoHW">Archivos Soporte Hardware</a></li>
+                    <li><a href="/Soporte/Gestion">Gestionar Soportes Equipos</a></li>
+                    <li><a href="/Soporte/ArchivoHW">Archivos Soporte Equipos</a></li>
 
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-laptop'></i> <span>Soporte Software</span> <i
+                <a href="#"><i class='fa fa-laptop'></i> <span>Soporte Servicios</span> <i
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->level == 1)

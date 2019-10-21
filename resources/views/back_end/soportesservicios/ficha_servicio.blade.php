@@ -126,7 +126,7 @@
                                     <center>Cierre</center>
                                 </th>
                                 <th style="width: 50px">
-                                    <center>VB Jefatura</center>
+                                    <center>VB Jefe Informática</center>
                                 </th>
                             </tr>
                             <tr>
