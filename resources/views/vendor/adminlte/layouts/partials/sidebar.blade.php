@@ -58,7 +58,7 @@
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->level == 1)
-                        <li><a href="/Soporte/JefaturaSW">Gestión Jefatura</a></li>
+                        <li><a href="/Soporte/JefaturaHW">Gestión Jefatura</a></li>
                     @endif
                     <li><a href="/Soporte/Gestion">Gestionar Soportes Hardware</a></li>
                     <li><a href="/Soporte/ArchivoHW">Archivos Soporte Hardware</a></li>
@@ -70,7 +70,7 @@
                             class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     @if(Auth::user()->level == 1)
-                        <li><a href="/Soporte/JefaturaHW">Gestión Jefatura</a></li>
+                        <li><a href="/Soporte/JefaturaSW">Gestión Jefatura</a></li>
                     @endif
                     <li><a href="/Soporte/GestionServicios">Gestionar Soportes Servicios</a></li>
                     <li><a href="/Soporte/ArchivoSW">Archivos Soporte Software</a></li>

@@ -208,4 +208,41 @@ class SoportesServicios extends Controller
         return redirect('/Soporte/GestionServicios');
     }
 
+    public function jefatura_sw(){
+
+        $soportes = DB::table('solicitud_servicio')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
+            ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
+            ->where([
+                ['funcAprobSolServ', '=', null],
+                ['estadoSolServ', '<>', 14],
+                ['estadoSolServ', '<>', 15],
+                ['estadoSolServ', '<>', 16],
+                ['estadoSolServ', '<>', 19],
+                ['estadoSolServ', '<>', 20]
+
+            ])
+            ->get();
+
+        return view('back_end.soportesservicios.jefatura', [
+            'listadoSop' => $soportes,
+        ]);
+
+    }
+
+    public function aprueba_jefatura(Request $request){
+
+        $fecha = new DateTime;
+
+        DB::table('solicitud_servicio')
+            ->where('idSolServ', $request->input('idSolServ'))
+            ->update([
+                'fecAprobSolServ' => $fecha,
+                'estadoSolServ' => 19
+            ]);
+
+        return back();
+    }
+
 }

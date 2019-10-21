@@ -79,8 +79,9 @@ Route::post('/Soporte/ObservacionesServicio', 'SoportesServicios@observaciones')
 Route::post('/Soporte/ObsCierreServicio', 'SoportesServicios@observacionescierre');
 Route::post('/Soporte/CierreServicio', 'SoportesServicios@cerrar');
 
-
-
+//Rutas Módulo Gestión de Jefaturas
+Route::get('/Soporte/JefaturaSW','SoportesServicios@jefatura_sw');
+Route::post('/Soporte/ApruebaJefatura','SoportesServicios@aprueba_jefatura');
 
 
 
