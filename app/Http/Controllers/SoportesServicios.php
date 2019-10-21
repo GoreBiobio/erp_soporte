@@ -208,7 +208,8 @@ class SoportesServicios extends Controller
         return redirect('/Soporte/GestionServicios');
     }
 
-    public function jefatura_sw(){
+    public function jefatura_sw()
+    {
 
         $soportes = DB::table('solicitud_servicio')
             ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
@@ -231,7 +232,8 @@ class SoportesServicios extends Controller
 
     }
 
-    public function aprueba_jefatura(Request $request){
+    public function aprueba_jefatura(Request $request)
+    {
 
         $fecha = new DateTime;
 
@@ -245,4 +247,22 @@ class SoportesServicios extends Controller
         return back();
     }
 
+    public function archivo()
+    {
+
+        $arc_sop = DB::table('solicitud_servicio')
+            ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
+            ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
+            ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
+            ->where([
+                ['funcRespoSolServ', '=', Auth::user()->idFuncUser],
+                ['estadoSolServ', '=', '19'],
+            ])
+            ->get();
+
+        return view('back_end.soportesservicios.archivo', [
+            'listadoSop' => $arc_sop,
+        ]);
+
+    }
 }
