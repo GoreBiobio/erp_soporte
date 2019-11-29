@@ -23,6 +23,7 @@
                         <th>ID Soporte</th>
                         <th>Fecha/Hora Solicitud</th>
                         <th>Usuario - Servicio</th>
+                        <th>Atendido por</th>
                         <th>Detalle de la Solicitud</th>
                         <th>Nivel Urgencia</th>
                         <th>Estado Actual</th>
@@ -51,6 +52,9 @@
                                     Anexo: {{ $listadoSop -> anexoFunc }} -
                                     Servicio: {{ $listadoSop -> servicio }}
                                 </center>
+                            </td>
+                            <td>
+                                <center><strong>{{ $listadoSop -> name }}</strong></center>
                             </td>
                             <td>
                                 <center>{{ $listadoSop -> solicitudServ }}</center>

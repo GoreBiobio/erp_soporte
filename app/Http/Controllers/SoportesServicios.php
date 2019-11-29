@@ -215,6 +215,7 @@ class SoportesServicios extends Controller
             ->join('servicio', 'servicio.idServ', '=', 'solicitud_servicio.idServ')
             ->join('estados', 'estados.idEstado', '=', 'solicitud_servicio.estadoSolServ')
             ->join('funcionarios', 'funcionarios.idFunc', '=', 'solicitud_servicio.funcSolServ')
+            ->join('users','users.idFuncUser','=','solicitud_servicio.funcRespoSolServ')
             ->where([
                 ['funcAprobSolServ', '=', null],
                 ['estadoSolServ', '<>', 14],
